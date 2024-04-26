@@ -9,11 +9,12 @@
             Classe que atua como cliente para os serviços boletos.
             </summary>
         </member>
-        <member name="M:BBNetCore.Boleto.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.Boleto.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
-            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Boleto"/>.
             </summary>
-            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+            <param name="versaoApi">Versão da API.</param> 
+            <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.Boleto.Gerar(BBNetCore.Models.DadosBoleto)">
             <summary>
@@ -69,11 +70,12 @@
             Classe que atua como cliente para os serviços boletos.
             </summary>
         </member>
-        <member name="M:BBNetCore.BoletoPix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.BoletoPix.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
-            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.BoletoPix"/>.
             </summary>
-            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+            <param name="versaoApi">Versão da API.</param> 
+            <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.BoletoPix.Gerar(System.String,System.Int32)">
             <summary>
@@ -2012,11 +2014,6 @@
             Tipo de ambiente.
             </summary>    
         </member>
-        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.VersaoApi">
-            <summary>
-            Versão da API do PIX.
-            </summary>    
-        </member>
         <member name="P:BBNetCore.Models.ConfiguracoesApiBB.Certificado">
             <summary>
             Certficado de assinatura digital
@@ -3691,11 +3688,12 @@
             Classe que atua como cliente para os serviços pix.
             </summary>
         </member>
-        <member name="M:BBNetCore.Pix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.Pix.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
             </summary>
-            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+            <param name="versaoApi">Versão da API.</param> 
+            <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.Pix.Gerar(BBNetCore.Models.DadosPix)">
             <summary>
@@ -3833,12 +3831,18 @@
             Tipo de serviço a ser usado pela API.
             </summary>
         </member>
-        <member name="M:BBNetCore.ServicosBase.#ctor(BBNetCore.Enumerators.TipoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="P:BBNetCore.ServicosBase.VersaoApi">
+            <summary>
+            Versão da API do PIX.
+            </summary>    
+        </member>
+        <member name="M:BBNetCore.ServicosBase.#ctor(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.ServicosBase"/>.
             </summary>
-            <param name="tipoApi"></param>
-            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+            <param name="tipoApi">Tipo de serviço</param>
+            <param name="versaoApi">Versão da API</param>
+            <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.ServicosBase.CriarInstancia">
             <summary>
