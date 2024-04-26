@@ -1,0 +1,4078 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BBNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:BBNetCore.Boleto">
+            <summary>
+            Classe que atua como cliente para os serviços boletos.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Boleto.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
+            </summary>
+            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+        </member>
+        <member name="M:BBNetCore.Boleto.Gerar(BBNetCore.Models.DadosBoleto)">
+            <summary>
+            Gerar um boleto de cobrança bancário.
+            </summary>
+            <param name="boleto">Dados para gerar um boleto bancário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.GerarAsync(BBNetCore.Models.DadosBoleto,System.Threading.CancellationToken)">
+            <summary>
+            Gerar um boleto de cobrança bancário como uma operação assíncrona.
+            </summary>
+            <param name="boleto">Dados para gerar um boleto bancário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.Consultar(System.String,System.Int32)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param> 
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.ConsultarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.Cancelar(System.String,System.Int32)">
+            <summary>
+            Gerar um boleto de cobrança bancário.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.CancelarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gerar um boleto de cobrança bancário como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="T:BBNetCore.BoletoPix">
+            <summary>
+            Classe que atua como cliente para os serviços boletos.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
+            </summary>
+            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+        </member>
+        <member name="M:BBNetCore.BoletoPix.Gerar(System.String,System.Int32)">
+            <summary>
+            Gerar Pix vinculado a um boleto de cobrança através de um QRCode Dinâmico ou Estático.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.GerarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gerar Pix vinculado a um boleto de cobrança através de um QRCode Dinâmico ou Estático como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.GerarManual(System.String,System.Int32)">
+            <summary>
+            Gerar Pix vinculado a um boleto de cobrança registrado por troca de arquivo, através de um QRCode Dinâmico ou Estático.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.GerarManualAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Gerar Pix vinculado a um boleto de cobrança registrado por troca de arquivo, através de um QRCode Dinâmico ou Estático como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.Cancelar(System.String,System.Int32)">
+            <summary>
+            Cancelar Pix vinculado a um boleto de cobrança existente.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.CancelarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Cancelar Pix vinculado a um boleto de cobrança existente como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.CancelarManual(System.String,System.Int32)">
+            <summary>
+            Cancelar Pix vinculado a um boleto de cobrança existente registrado por troca de arquivo.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.CancelarManualAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Cancelar Pix vinculado a um boleto de cobrança existente registrado por troca de arquivo como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.Consultar(System.String,System.Int32)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.BoletoPix.ConsultarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid como uma operação assíncrona.
+            </summary>
+            <param name="nossoNumero">Número do boleto bancário (único e exclusivo) que identifica o título e é usado para pagá-lo.</param>
+            <param name="convenio">Identificador determinado pelo sistema de boleto bancário usado para emissão e liquidação do boleto e, portanto, usado para creditar o Beneficiário.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="T:BBNetCore.Constants.Permissao">
+            <summary>
+            Classe com variaveis constantes de permissões
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobWrite">
+            <summary>
+            Permissão para alteração de cobranças
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobRead">
+            <summary>
+            Permissão para consulta de cobranças
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobvWrite">
+            <summary>
+            Permissão para alteração de cobranças com vencimento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobvRead">
+            <summary>
+            Permissão para consulta de cobranças com vencimento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.PixRead">
+            <summary>
+            Permissão para consulta de pix
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.PixWrite">
+            <summary>
+            Permissão para alteração de PixPaid
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.LotecobvRead">
+            <summary>
+            Permissão para consulta de lotes de cobranças com vencimento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.LotecobvWrite">
+            <summary>
+            Permissão para alteração de lotes de cobranças com vencimento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.WebhookRead">
+            <summary>
+            Permissão para consulta do webhook
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.WebhookWrite">
+            <summary>
+            Permissão para alteração do webhook
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.PayloadLocationRead">
+            <summary>
+            Permissão para consulta de payloads
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.PayloadLocationWrite">
+            <summary>
+            Permissão para alteração de payloads
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobrancasBoletosWrite">
+            <summary>
+            Permite registrar e baixar boletos de cobrança
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Constants.Permissao.CobrancasBoletosRead">
+            <summary>
+            Permite consultar detalhes de boletos de cobrança
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Converters.AbreviacaoBoleanoConverter">
+            <summary>
+            Classe para conversão da abreviação do boleano "S" ou "N" para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.AbreviacaoBoleanoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.AbreviacaoBoleanoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.AbreviacaoBoleanoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.CodigoAceiteConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.CodigoAceite"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoAceiteConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoAceiteConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoAceiteConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.CodigoModalidadeConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.CodigoModalidade"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoModalidadeConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoModalidadeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.CodigoModalidadeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.FormaPagamentoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.FormaPagamento"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.FormaPagamentoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.FormaPagamentoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.FormaPagamentoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.FormataDataConverter">
+            <summary>
+            Classe responsável pela conversão da data para um formato específico.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.FormataDataConverter.#ctor(System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Converters.FormataDataConverter"/>.
+            </summary>
+            <param name="format">Formado de data desejado.</param>
+        </member>
+        <member name="M:BBNetCore.Converters.FormataDataConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="T:BBNetCore.Converters.FormataDecimalConverter">
+            <summary>
+            Classe responsável pela conversão de valores decimais.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.FormataDecimalConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.FormataDecimalConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="M:BBNetCore.Converters.FormataDecimalConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="T:BBNetCore.Converters.NaturezaRecebimentoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.NaturezaRecebimento"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.NaturezaRecebimentoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.NaturezaRecebimentoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.NaturezaRecebimentoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.OcorrenciasCartorioConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.OcorrenciasCartorio"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.OcorrenciasCartorioConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.OcorrenciasCartorioConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.OcorrenciasCartorioConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.SituacaoBoletoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.SituacaoBoleto"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.SituacaoBoletoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.SituacaoBoletoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.SituacaoBoletoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.StatusCobrancaConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.StatusCobranca"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusCobrancaConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusCobrancaConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusCobrancaConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.StatusDevolucaoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.StatusDevolucao"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusDevolucaoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusDevolucaoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.StatusDevolucaoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoBaixaConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoBaixa"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoBaixaConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoBaixaConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoBaixaConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoCobrancaConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoCobranca"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoCobrancaConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoCobrancaConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoCobrancaConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoDescontoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoDesconto"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoDescontoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoDescontoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoDescontoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoInscricaoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoInscricao"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoInscricaoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoInscricaoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoInscricaoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoJurosMoraConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoJurosMora"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoJurosMoraConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoJurosMoraConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoJurosMoraConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoLiquidacaoConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoLiquidacao"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoLiquidacaoConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoLiquidacaoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoLiquidacaoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoMoedaConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Converters.TipoMoeda"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMoedaConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMoedaConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMoedaConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoMultaConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoMulta"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMultaConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMultaConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoMultaConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoTituloConverter">
+            <summary>
+            Classe para conversão do enumerador <see cref="T:BBNetCore.Enumerators.TipoTitulo"/> para json e vice-versa.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoTituloConverter.CanConvert(System.Type)">
+            <summary>
+            Método que valida se o tipo informado pode ser convertido.
+            </summary>
+            <param name="objectType">Tipo do objeto à ser convertido.</param>
+            <returns>Verdadeiro caso o objeto possa ser convertido e falso caso contrário.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoTituloConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o valor json no objeto referente.
+            </summary>
+            <param name="reader">Leitor do arquivo json.</param>
+            <param name="objectType">tipo do objeto à ser convertido.</param>
+            <param name="existingValue">Valor existente.</param>
+            <param name="serializer">Serializador json.</param>
+            <returns>Objeto referente ao valor informado.</returns>
+        </member>
+        <member name="M:BBNetCore.Converters.TipoTituloConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Método que transforma o objeto em sua representação json referente.
+            </summary>
+            <param name="writer">Escritor do arquivo json.</param>
+            <param name="value">Objeto à ser traduzido.</param>
+            <param name="serializer">Serializador json.</param>
+        </member>
+        <member name="T:BBNetCore.Converters.TipoMoeda">
+            <summary>
+            Enum contendo os códigos para identificar a moeda referenciada no boleto.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.Nenhum">
+            <summary>
+            Nenhum tipo de moeda
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.FAJTR">
+            <summary>
+            FAJTR
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.DOLAR">
+            <summary>
+            Dólar
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.EURO">
+            <summary>
+            Euro
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.IENE">
+            <summary>
+            Iene
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.MARCO_ALEMAO">
+            <summary>
+            Marco Alemão
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.FTR">
+            <summary>
+            FTR
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.IDTR">
+            <summary>
+            IDTR
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.UFIR">
+            <summary>
+            UFIR
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.REAL">
+            <summary>
+            Real
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.SELIC">
+            <summary>
+            SELIC
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.IGP_M">
+            <summary>
+            IGP-M
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.INPC">
+            <summary>
+            INPC
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Converters.TipoMoeda.TR_BESC">
+            <summary>
+            TR (BESC)
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.AmbienteApi">
+            <summary>
+            Enumerador com os tipos de ambiente disponíveis no serviço.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.AmbienteApi.Desenvolvimento">
+            <summary>
+            Ambiente de testes e/ou desenvolvimento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.AmbienteApi.Producao">
+            <summary>
+            Ambiente de produção.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.CodigoAceite">
+            <summary>
+            Enum contendo códigos para identificar se o boleto de cobrança foi aceito
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.CodigoAceite.Aceite">
+            <summary>
+            Modalidade simples.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.CodigoAceite.NaoAceite">
+            <summary>
+            Modalidade vinculada.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.CodigoModalidade">
+            <summary>
+            Enum contendo modalidades de cobrança existentes no banco
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.CodigoModalidade.Simples">
+            <summary>
+            Modalidade simples.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.CodigoModalidade.Vinculada">
+            <summary>
+            Modalidade vinculada.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.FormaPagamento">
+            <summary>
+            Enum contendo códigos para identificação da forma de pagamento que o boleto foi pago.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.PagamentoPendente">
+            <summary>
+            Pendente.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieAgencias">
+            <summary>
+            Espécie, agencias postos tradicionais.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieAutoAtendimento">
+            <summary>
+            Espécie, terminal de auto-atendimento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieInternet">
+            <summary>
+            Espécie, internet (home / office banking).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieCorrespondenteBancario">
+            <summary>
+            Espécie, correspondente bancário.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieCallCenter">
+            <summary>
+            Espécie, central de atendimento(call center).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieArquivo">
+            <summary>
+            Espécie, arquivo eletrônico
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspecieDebito">
+            <summary>
+            Espécie, debito direto autorizado.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.EspeciePix">
+            <summary>
+            Espécie, pix.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoAgencias">
+            <summary>
+            Débito em conta, agencias postos tradicionais.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoAutoAtendimento">
+            <summary>
+            Débito em conta, terminal de auto-atendimento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoInternet">
+            <summary>
+            Débito em conta, internet (home / office banking).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoCorrespondenteBancario">
+            <summary>
+            Débito em conta, correspondente bancário.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoCallCenter">
+            <summary>
+            Débito em conta, central de atendimento(call center).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoArquivo">
+            <summary>
+            Débito em conta, arquivo eletrônico
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoDebito">
+            <summary>
+            Débito em conta, debito direto autorizado.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.DebitoPix">
+            <summary>
+            Débito em conta, pix.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoAgencias">
+            <summary>
+            Cartão de crédito, agencias postos tradicionais.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoAutoAtendimento">
+            <summary>
+            Cartão de crédito, terminal de auto-atendimento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoInternet">
+            <summary>
+            Cartão de crédito, internet (home / office banking).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoCorrespondenteBancario">
+            <summary>
+            Cartão de crédito, correspondente bancário.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoCallCenter">
+            <summary>
+            Cartão de crédito, central de atendimento(call center).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoArquivo">
+            <summary>
+            Cartão de crédito, arquivo eletrônico
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoDebito">
+            <summary>
+            Cartão de crédito, debito direto autorizado.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.CartaoCreditoPix">
+            <summary>
+            Cartão de crédito, pix.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeAgencias">
+            <summary>
+            Cheque, agencias postos tradicionais.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeAutoAtendimento">
+            <summary>
+            Cheque, terminal de auto-atendimento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeInternet">
+            <summary>
+            Cheque, internet (home / office banking).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeCorrespondenteBancario">
+            <summary>
+            Cheque, correspondente bancário.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeCallCenter">
+            <summary>
+            Cheque, central de atendimento(call center).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeArquivo">
+            <summary>
+            Cheque, arquivo eletrônico
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequeDebito">
+            <summary>
+            Cheque, debito direto autorizado.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.FormaPagamento.ChequePix">
+            <summary>
+            Cheque, pix.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.MimeTypes">
+            <summary>
+            Um mapeamento do tipo de conteudo, MIME-type (Multipurpose Internet Mail Extensions).
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.MimeTypes.Json">
+            <summary>
+            Corresponde ao tipo Json.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.MimeTypes.Form">
+            <summary>
+            Corresponde ao tipo Form url encoding.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.NaturezaRecebimento">
+            <summary>
+            Enum contendo códigos para identificar as ocorrências (rejeições, tarifas, custas, liquidação e baixas) do boleto.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.Normal">
+            <summary>
+            Estado normal da conta
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.PorConta">
+            <summary>
+            Por conta
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.PorSaldo">
+            <summary>
+            Por saldo
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.ChequeACompensar">
+            <summary>
+            Cheque a compensar
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.LiquidadoNaApresentacao">
+            <summary>
+            Liquidado na apresentação
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.PorContaEmCartorio">
+            <summary>
+            Por conta em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.NaturezaRecebimento.EmCartorio">
+            <summary>
+            Em cartório
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.OcorrenciasCartorio">
+            <summary>
+            Enum contendo os códigos para identificação das ocorrências de retorno do cartório.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloProtocoladoTec">
+            <summary>
+            Título protocolado - Antigo "TEC"
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloPagoEmCartorio">
+            <summary>
+            Título pago em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloProtestadoDdp">
+            <summary>
+            Título protestado - Antigo "DDP"
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloRetiradoCartorioDds">
+            <summary>
+            Título retirado cartório - Antigo DDS
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloSustadoJudicialmente">
+            <summary>
+            Título sustado judicialmente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloRecusadoSemCustas">
+            <summary>
+            Título recusado sem custas
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloRecusadoComCustas">
+            <summary>
+            Título recusado com custas
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloPagoLiquidacaoCondicional">
+            <summary>
+            Título pago liquidação condicional
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloAceito">
+            <summary>
+            Título aceito
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.CustasEdital">
+            <summary>
+            Custas de edital
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.LiquidadoCartorioSemiAutomatico">
+            <summary>
+            LQ. Cartório AG. Semi-Autom.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.ChequeDevolvidoEncerramentoProtesto">
+            <summary>
+            CHQ Devolv. Tit. Enc. Prot.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloSustadoDefinitivo">
+            <summary>
+            Título sustado definitivo
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.RetiradaAposSustacaoJudicial">
+            <summary>
+            Retirada após sustação judicial
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.PagamentoCondicionalSeltec">
+            <summary>
+            Pagto condicional via SELTEC
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.OcorrenciasCartorio.TituloPagoEmCartorioSeltec">
+            <summary>
+            Título pago em cartório-SELTEC
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.SituacaoBoleto">
+            <summary>
+            Enum contendo os códigos da situação atual do boleto.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.Normal">
+            <summary>
+            Estado normal do título
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.MovimentoCartorio">
+            <summary>
+            Título com movimento de cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.EmCartorio">
+            <summary>
+            Título em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloComOcorrenciaCartorio">
+            <summary>
+            Título com ocorrência de cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.ProtestadoEletronico">
+            <summary>
+            Título protestado eletronicamente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.Liquidado">
+            <summary>
+            Título liquidado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.Baixado">
+            <summary>
+            Título baixado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloComPendenciaCartorio">
+            <summary>
+            Título com pendência de cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloProtestadoManual">
+            <summary>
+            Título protestado manualmente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloBaixadoPagoCartorio">
+            <summary>
+            Título baixado/pago em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloLiquidadoProtestado">
+            <summary>
+            Título liquidado/protestado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloLiquidadoProtestadoCartorio">
+            <summary>
+            Título liquidado/pago em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloProtestadoAguardandoBaixa">
+            <summary>
+            Título protestado aguardando baixa
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloEmLiquidacao">
+            <summary>
+            Título em liquidação
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloAgendado">
+            <summary>
+            Título agendado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloCreditado">
+            <summary>
+            Título creditado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.PagoEmChequeAguardandoLiquidacao">
+            <summary>
+            Pago em cheque - aguardando liquidação
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.PagoParcialmente">
+            <summary>
+            Pago parcialmente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.PagoParcialmenteCreditado">
+            <summary>
+            Pago parcialmente creditado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.TituloAgendadoCompe">
+            <summary>
+            Título agendado COMPE
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.SituacaoBoleto.EmProcessamento">
+            <summary>
+            Em processamento (estado transitório)
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.StatusCobranca">
+            <summary>
+            Enum contendo os status de cobrança
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusCobranca.Ativa">
+            <summary>
+            Cobrança ativa
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusCobranca.Concluida">
+            <summary>
+            Cobrança concluida
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusCobranca.RemovedPeloRecebedor">
+            <summary>
+            Removida pelo usuário recebedor
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusCobranca.RemovedPeloPsp">
+            <summary>
+            Removida pelo usuário PSP
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.StatusDevolucao">
+            <summary>
+            Enum contendo os status de devolução
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusDevolucao.EmProcessamento">
+            <summary>
+            Em proccessamento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusDevolucao.Devolvido">
+            <summary>
+            Devolvido
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.StatusDevolucao.NaoRealizado">
+            <summary>
+            Não realizado
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoApi">
+            <summary>
+            Enumerador com os tipos de serviços da API.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoApi.Boletos">
+            <summary>
+            Serviço de boleto de cobrança. 
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoApi.Pix">
+            <summary>
+            Serviço de pagamento instantâneo (PIX). 
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoBaixa">
+            <summary>
+            Enum contendo os códigos para identificação do tipo de baixa do boleto.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.BaixadoPorSolicitacao">
+            <summary>
+            Baixado por solicitação
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.EntregaFrancoPagamento">
+            <summary>
+            Entrega franco pagamento
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.ComandadaBanco">
+            <summary>
+            Comandada banco
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.ComandadaClienteArquivo">
+            <summary>
+            Comandada cliente - Arquivo
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.ComandadaClienteOnline">
+            <summary>
+            Comandada cliente - On-line
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.DecursoPrazoCliente">
+            <summary>
+            Decurso prazo - Cliente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.DecursoPrazoBanco">
+            <summary>
+            Decurso prazo - Banco
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.Protestado">
+            <summary>
+            Protestado
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.LiquidadoAnteriormente">
+            <summary>
+            Liquidado anteriormente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.HabilitadoEmProcesso">
+            <summary>
+            Habilitado em processo
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.TransferidoParaPerdas">
+            <summary>
+            Transferido para perdas
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.RegistradoIndevidamente">
+            <summary>
+            Registrado indevidamente
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoBaixa.BaixaAutomatica">
+            <summary>
+            Baixa automática
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoCobranca">
+            <summary>
+            Enum contendo os tipos de cobrança
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoCobranca.CobrancaImediata">
+            <summary>
+            Cobranças imediatas
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoCobranca.CobrancaComVencimento">
+            <summary>
+            Cobranças com vencimento
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoDesconto">
+            <summary>
+            Enum contendo códigos para identificar de desconto do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoDesconto.SemDesconto">
+            <summary>
+            Sem desconto.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoDesconto.ValorFixo">
+            <summary>
+            Valor fixo até a data informada.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoDesconto.Percentual">
+            <summary>
+            Percentual até a data informada.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoDesconto.PorDiaDeAntecipacao">
+            <summary>
+            Desconto por dia de antecipação.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoInscricao">
+            <summary>
+            Enum contendo códigos para identificar o tipo de inscrição da pessoa, física ou jurídica.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoInscricao.CPF">
+            <summary>
+            CPF.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoInscricao.CNPJ">
+            <summary>
+            CNPJ.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoJurosMora">
+            <summary>
+            Enum contendo códigos para identificar o tipo de juros do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoJurosMora.Dispenar">
+            <summary>
+            Dispensar os juros.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoJurosMora.ValorPorDiaAtraso">
+            <summary>
+            Valor por dia de atraso.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoJurosMora.TaxaMensal">
+            <summary>
+            Percentual de juros por mês de atraso.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoJurosMora.Isento">
+            <summary>
+            Isento de juros.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoLiquidacao">
+            <summary>
+            Enum contendo códigos para identificação do tipo de liquidação.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.Caixa">
+            <summary>
+            Caixa
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.ViaCompe">
+            <summary>
+            Via COMPE
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.EmCartorio">
+            <summary>
+            Em cartório
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.Pix">
+            <summary>
+            PIX
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.TituloEmLiquidacaoAge">
+            <summary>
+            Título em liquidação - Origem AGE
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.TituloEmLiquidacaoPgt">
+            <summary>
+            Título em liquidação - PGT
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.BancoPostal">
+            <summary>
+            Banco Postal
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoLiquidacao.TituloLiquidadoCompeStr">
+            <summary>
+            Título liquidado via COMPE/STR
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoMulta">
+            <summary>
+            Enum contendo códigos para identificar o tipo de multa do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoMulta.SemMulta">
+            <summary>
+            Sem multa.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoMulta.ValorFixo">
+            <summary>
+            Valor fixo da multa.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoMulta.Percentual">
+            <summary>
+            Percentual de multa.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.TipoTitulo">
+            <summary>
+            Enum contendo os identificadores do tipo de boleto de cobrança.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.Cheque">
+            <summary>
+            Documento que ordena a um banco que pague uma quantia específica de uma conta específica.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DuplicataMercantil">
+            <summary>
+            Título de crédito emitido por um vendedor com base em uma fatura de venda de mercadorias ou prestação de serviços.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DuplicataMercantilPorIndicacao">
+            <summary>
+            Duplicata mercantil emitida com base em uma indicação.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DuplicataServico">
+            <summary>
+            Título de crédito emitido com base em uma fatura de prestação de serviços.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DuplicataServicoPorIndicacao">
+            <summary>
+            Duplicata de serviço emitida com base em uma indicação.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DuplicataRural">
+            <summary>
+            Título de crédito emitido com base em uma fatura de venda de produtos agrícolas.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.LetraCambio">
+            <summary>
+            Documento que ordena a um indivíduo que pague uma quantia específica a outra pessoa em uma data futura específica.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaCreditoComercial">
+            <summary>
+            Documento emitido por um banco que promete pagar ao portador uma quantia específica.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaCreditoExportacao">
+            <summary>
+            Documento emitido por um banco que promete pagar ao portador uma quantia específica relacionada a uma exportação.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaCreditoIndustrial">
+            <summary>
+            Documento emitido por um banco que promete pagar ao portador uma quantia específica relacionada a uma indústria.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaCreditoRural">
+            <summary>
+            Documento emitido por um banco que promete pagar ao portador uma quantia específica relacionada a uma atividade rural.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaPromissoria">
+            <summary>
+            Documento em que o emissor promete incondicionalmente pagar uma quantia específica a outra pessoa em uma data futura específica.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaPromissoriaRural">
+             <summary>
+            Nota promissória relacionada a uma atividade rural.
+             </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.TriplicataMercantil">
+            <summary>
+            Duplicata mercantil emitida três vezes.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.TriplicataServico">
+            <summary>
+            Duplicata de serviço emitida três vezes.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaSeguro">
+            <summary>
+            Documento que comprova a existência de um contrato de seguro.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.Recibo">
+            <summary>
+            Documento que comprova que uma determinada quantia foi recebida.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.Fatura">
+            <summary>
+            Documento que detalha uma transação entre um vendedor e um comprador.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.NotaDebito">
+            <summary>
+            Documento que registra uma dívida que deve ser paga.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.ApoliceSeguro">
+            <summary>
+            Contrato de seguro.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.MensalidadeEscolar">
+            <summary>
+            Quantia paga mensalmente para uma instituição de ensino.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.ParcelaConsorcio">
+            <summary>
+            Quantia paga periodicamente por um membro de um consórcio.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DividaAtivaGovernoFederal">
+            <summary>
+            Dívida devida ao governo federal.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DividaAtivaGovernoEstadual">
+            <summary>
+            Dívida devida a um governo estadual.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.DividaAtivaGovernoMunicipal">
+            <summary>
+            Dívida devida a um governo municipal.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.CartaoCredito">
+            <summary>
+            Meio de pagamento eletrônico.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.BoletoProposta">
+            <summary>
+            Documento que propõe um pagamento.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.BoletoAporte">
+            <summary>
+            Documento que registra um aporte de recursos.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.TipoTitulo.Outros">
+            <summary>
+            Outros tipos de documentos não listados.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Enumerators.VersaoApi">
+            <summary>
+            Enumerador com as versões disponíveis da API do PIX.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.VersaoApi.V1">
+            <summary>
+            Versão 1
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Enumerators.VersaoApi.V2">
+            <summary>
+            Versão 2
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Exceptions.ApiException">
+            <summary>
+            Classe de exceção básica da biblioteca.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.ApiException.Errors">
+            <summary>
+            Erros reportados pelo serviço.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Exceptions.ApiException.#ctor(System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.ApiException"/>.
+            </summary>
+            <param name="message">Mensagem à ser definida na excessão.</param>
+        </member>
+        <member name="M:BBNetCore.Exceptions.ApiException.#ctor(BBNetCore.Exceptions.HttpException)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.ApiException"/>.
+            </summary>
+            <param name="ex">Os dados da execção.</param>
+        </member>
+        <member name="T:BBNetCore.Exceptions.HttpException">
+            <summary>
+            Classe de exceção de requisições HTTP.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.Verb">
+            <summary>
+            O método HTTP.
+            </summary> 
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.Headers">
+            <summary>
+            Os cabeçalhos da solicitação enviada.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.ReasonPhrase">
+            <summary>
+            Frase de motivo que normalmente é enviada pelos servidores junto com o código de status.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.Uri">
+            <summary>
+            A representação da URL
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.Content">
+            <summary>
+            O conteudo do erro
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.ResponseHeaders">
+            <summary>
+            Os cabeçalhos da resposta da solicitação.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Exceptions.HttpException.StatusCode">
+            <summary>
+            O status da requisição.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Exceptions.HttpException.#ctor(System.Uri,System.String,System.String,System.Net.Http.Headers.HttpRequestHeaders,System.String,System.Net.HttpStatusCode,System.Net.Http.Headers.HttpResponseHeaders,System.Exception)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.HttpException"/>.
+            </summary>
+            <param name="uri">A representação da URL.</param>
+            <param name="verb">O método HTTP usado pela mensagem de solicitação.</param>
+            <param name="reasonPhrase">The reason phrase.</param>
+            <param name="headers">The headers of the request.</param>
+            <param name="content">The content.</param>
+            <param name="statusCode">The status code.</param>
+            <param name="responseHeaders">The headers of response.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="T:BBNetCore.Models.ApiErro">
+            <summary>
+            Classe contendo mensagens de erro reportadas pelo serviço.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro.Codigo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro.Versao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro.Mensagem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro.Ocorrencia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.ApiErro2">
+            <summary>
+            Classe contendo mensagens de erro reportadas pelo serviço.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro2.CodigoStatus">
+            <summary>
+            Código HTTP do status retornado.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro2.Erro">
+            <summary>
+            Typo do erro
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro2.Mensagem">
+            <summary>
+            Mensagem do problema.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.ApiErro3">
+            <summary>
+            Classe contendo mensagens de erro reportadas pelo serviço.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro3.Tipo">
+            <summary>
+            URI de referência que identifica o tipo de problema. De acordo com a RFC 7807.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro3.Descricao">
+            <summary>
+            Descrição resumida do problema.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro3.Status">
+            <summary>
+            Código HTTP do status retornado.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro3.Detalhes">
+            <summary>
+            Descrição completa do problema.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ApiErro3.Violacoes">
+            <summary>
+            Identificador de correlação do problema para fins de suporte.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.Violacoes">
+            <summary>
+            Classe contendo informações do problema para fins de suporte.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.Violacoes.Razao">
+            <summary>
+            Descrição do erro
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.Violacoes.Propriedade">
+            <summary>
+            Nome da propriedade.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.Violacoes.Valor">
+            <summary>
+            Valor da propriedade
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.ConfiguracoesApiBB">
+            <summary>
+            Classe responsavel pela configuração e preparação da comunicação da API.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.ChaveApp">
+            <summary>
+            É a credencial para acionar as APIS do Banco do Brasil.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.ClienteId">
+            <summary>
+            É o identificador público e único no OAuth do Banco do Brasil.
+            </summary>    
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.ClienteSecret">
+            <summary>
+            É conhecido apenas para sua aplicação e o servidor de autorização. Por isso, tome muito cuidado com seu armazenamento.
+            Em caso de suspeita de fraude, deverá acessar suas Credenciais dentro da sua Aplicação e realizar a troca do mesmo.
+            </summary>    
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.TipoFluxo">
+            <summary>
+            Typo de fluxo de requisição. Padrão 'client_credentials'.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.Permissoes">
+            <summary>
+            Permissões de acesso aos recursos da API.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.AmbienteApi">
+            <summary>
+            Tipo de ambiente.
+            </summary>    
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.VersaoApi">
+            <summary>
+            Versão da API do PIX.
+            </summary>    
+        </member>
+        <member name="P:BBNetCore.Models.ConfiguracoesApiBB.Certificado">
+            <summary>
+            Certficado de assinatura digital
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoleto">
+            <summary>
+            Classe que representa os dados de uma solicitação de criação de boletos bancários.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Convenio">
+            <summary>
+            Número do convênio de Cobrança do Cliente. Identificador determinado pelo sistema Cobrança para controlar
+            a emissão de boletos, liquidação, crédito de valores ao Beneficiário e intercâmbio de dados com o cliente.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Carteira">
+            <summary>
+            Características do serviço de boleto bancário e como ele deve ser tratado pelo banco.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.VariacaoCarteira">
+            <summary>
+            Número da variação da carteira do convênio de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.CodigoModalidade">
+            <summary>
+            Identifica a característica dos boletos dentro das modalidades de cobrança existentes no banco.
+            Domínio: 01 - SIMPLES; 04 - VINCULADA
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Emissao">
+            <summary>
+            Data de emissão do boleto (formato "dd.mm.aaaaa").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Vencimento">
+            <summary>
+            Data de vencimento do boleto (formato "dd.mm.aaaaa").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Valor">
+            <summary>
+            Valor de cobrança > 0.00, emitido em Real (formato decimal separado por "."). Valor do boleto no registro.
+            Deve ser maior que a soma dos campos “VALOR DO DESCONTO DO TÍTULO” e “VALOR DO ABATIMENTO DO TÍTULO”, se informados.
+            Informação não passível de alteração após a criação.
+            No caso de emissão com valor equivocado, sugerimos cancelar e emitir novo boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.ValorAbatimento">
+            <summary>
+            Valor de dedução do boleto >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.QtdDiasProtesto">
+            <summary>
+            Quantos dias após a data de vencimento do boleto para iniciar o processo de cobrança através de protesto.
+            (valor inteiro >= 0).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.QtdDiasNegativacao">
+            <summary>
+            Quantos dias após a data de vencimento do boleto para iniciar o processo de negativação através da opção escolhida no campo orgaoNegativador.
+            (valor inteiro >= 0).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.OrgaoNegativador">
+            <summary>
+            Código do Órgão Negativador.
+            Domínio: 10 - SERASA
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.AceiteTituloVencido">
+            <summary>
+            Indicador de que o boleto pode ou não ser recebido após o vencimento. Campo não obrigatório.
+            Se não informado, será assumido a informação de limite de recebimento que está definida no convênio.
+            <para></para> 
+            Quando informado "S" em conjunto com o campo "numeroDiasLimiteRecebimento", será definido a quantidade de dias (corridos) que este boleto ficará disponível para pagamento após seu vencimento. Obs.: Se definido "S" e o campo "numeroDiasLimiteRecebimento" ficar com valor zero também será assumido a informação de limite de recebimento que está definida no convênio.
+            <para></para>
+            Quando informado "N", fica definindo que o boleto NÃO permite pagamento em atraso, portanto só aceitará pagamento até a data do vencimento ou o próximo dia útil, quando o vencimento ocorrer em dia não útil.
+            <para></para>
+            Quando informado qualquer valor diferente de "S" ou "N" será assumido a informação de limite de recebimento que está definida no convênio.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.DiasLimiteRecebimento">
+            <summary>
+            Número de dias limite para recebimento. Informar valor inteiro > 0.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.CodigoAceite">
+            <summary>
+            Código para identificar se o boleto de cobrança foi aceito (reconhecimento da dívida pelo Pagador).
+            Domínios: A - ACEITE N - NAO ACEITE
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.TipoTitulo">
+            <summary>
+            Código para identificar o tipo de boleto de cobrança.
+            Domínios: 1- CHEQUE 2- DUPLICATA MERCANTIL 3- DUPLICATA MTIL POR INDICACAO 4- DUPLICATA DE SERVICO
+            5- DUPLICATA DE SRVC P/INDICACAO 6- DUPLICATA RURAL 7- LETRA DE CAMBIO 8- NOTA DE CREDITO COMERCIAL
+            9- NOTA DE CREDITO A EXPORTACAO 10- NOTA DE CREDITO INDULTRIAL 11- NOTA DE CREDITO RURAL 12- NOTA PROMISSORIA
+            13- NOTA PROMISSORIA RURAL 14- TRIPLICATA MERCANTIL 15- TRIPLICATA DE SERVICO 16- NOTA DE SEGURO 17- RECIBO
+            18- FATURA 19- NOTA DE DEBITO 20- APOLICE DE SEGURO 21- MENSALIDADE ESCOLAR 22- PARCELA DE CONSORCIO
+            23- DIVIDA ATIVA DA UNIAO 24- DIVIDA ATIVA DE ESTADO 25- DIVIDA ATIVA DE MUNICIPIO 31- CARTAO DE CREDITO
+            32- BOLETO PROPOSTA 33- BOLETO APORTE 99- OUTROS.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.DescricaoTipoTitulo">
+            <summary>
+            Descrição do tipo de boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.PermiteRecebimentoParcial">
+            <summary>
+            Código para identificação da autorização de pagamento parcial do boleto.
+            Domínios: S - SIM N - NÃO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.NumeroTituloBeneficiario">
+            <summary>
+            Número de identificação do boleto (correspondente ao SEU NÚMERO), no formato STRING (Limitado a 15 caracteres - Letras Maiúsculas).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.InformacoesAdicionaisBeneficiario">
+            <summary>
+            Informações adicionais sobre o beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.NossoNumero">
+            <summary>
+            Número de identificação do boleto (correspondente ao NOSSO NÚMERO), no formato STRING, com 20 dígitos,
+            que deverá ser formatado da seguinte forma:
+            <para></para>
+            “000” + (número do convênio com 7 dígitos) + (10 algarismos - se necessário, completar com zeros à esquerda).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.MensagemImpressaNoBoleto">
+            <summary>
+            Mensagem definida pelo beneficiário para ser impressa no boleto. (Limitado a 30 caracteres)
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Desconto">
+            <summary>
+            Define a ausência ou a forma como será concedido o desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.SegundoDesconto">
+            <summary>
+            Define a ausência ou a forma como será concedido o segundo desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.TerceiroDesconto">
+            <summary>
+            Define a ausência ou a forma como será concedido o terceiro desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.JurosMora">
+            <summary>
+            Código utilizado pela FEBRABAN para identificar o tipo de taxa de juros, sendo:
+            0 - DISPENSAR, 1 - VALOR DIA ATRASO, 2 - TAXA MENSAL, 3 - ISENTO.
+            Se informado ‘0’ (zero) ou ‘3’ (três), os campos “PERCENTUAL DE JUROS DO TÍTULO” e
+            “VALOR DO JUROS DO TÍTULO” não devem ser informados ou ser informados igual a ‘0’ (zero).
+            <para></para>
+            O valor de juros e multa incidem sobre o valor atual do boleto (valor do boleto - valor de abatimento).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Multa">
+            <summary>
+            Código utilizado pela FEBRABAN para identificar o tipo de taxa de juros, sendo:
+            0 - DISPENSAR, 1 - VALOR DIA ATRASO, 2 - TAXA MENSAL, 3 - ISENTO.
+            Se informado ‘0’ (zero) ou ‘3’ (três), os campos “PERCENTUAL DE JUROS DO TÍTULO” e
+            “VALOR DO JUROS DO TÍTULO” não devem ser informados ou ser informados igual a ‘0’ (zero).
+            <para></para>
+            O valor de juros e multa incidem sobre o valor atual do boleto (valor do boleto - valor de abatimento).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Pagador">
+            <summary>
+            Define os dados do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.Beneficiario">
+            <summary>
+            Define os dados do beneficiário final.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoleto.GerarPix">
+            <summary>
+            Código para informar se o boleto terá um QRCode Pix atrelado. Se informado caracter inválido, assumirá 'N'.
+            Domínios: 'S' - QRCODE DINAMICO; 'N' - SEM PIX; OUTRO - SEM PIX
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoBeneficiario">
+            <summary>
+            Clase que representa os dados do beneficiário final.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoBeneficiario.TipoInscricao">
+            <summary>
+            Código que identifica o tipo de inscrição do beneficiário final.
+            Domínios: 1 - CPF; 2 - CNPJ
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoBeneficiario.NumeroInscricao">
+            <summary>
+            Número de registro do beneficiário final. Para o tipo = 1, informar numero do CPF. Para o tipo = 2, informar numero do CNPJ.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoBeneficiario.Nome">
+            <summary>
+            Nome do beneficiário final
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoBeneficiario.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoBeneficiario"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoBeneficiario.#ctor(BBNetCore.Enumerators.TipoInscricao,System.String,System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoBeneficiario"/>.
+            </summary>
+            <param name="tipoInscricao">Tipo de inscrição da pessoa, física ou jurídica.</param>
+            <param name="numeroInscricao">Número do documento de inscrição (CPF ou CNPJ).</param>
+            <param name="nome">Nome do beneficiário.</param>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoDesconto">
+            <summary>
+            Classe que representa a definição da ausência ou a forma como será concedido o desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoDesconto.Tipo">
+            <summary>
+            Mensagem definida pelo beneficiário para ser impressa no boleto. (Limitado a 30 caracteres)
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoDesconto.DataExpiracao">
+            <summary>
+            Se tipo > 0, Definir uma data de expiração do desconto, no formato "dd.mm.aaaa".
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoDesconto.porcentagem">
+            <summary>
+            Se tipo = 2, definir uma porcentagem de desconto >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoDesconto.Valor">
+            <summary>
+            Se tipo = 1, definir um valor de desconto >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoSegundoDesconto">
+            <summary>
+            Classe que representa a definição da ausência ou a forma como será concedido o segundo desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoTerceiroDesconto">
+            <summary>
+            Classe que representa a definição da ausência ou a forma como será concedido o terceiro desconto para o Título de Cobrança.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoJurosMora">
+            <summary>
+            Classe que representa os dados de juros que incedem sobre o boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoJurosMora.Tipo">
+            <summary>
+            Código utilizado pela FEBRABAN para identificar o tipo de taxa de juros.
+            Domínios: 0 - DISPENSAR; 1 - VALOR DIA ATRASO; 2 - TAXA MENSAL; 3 - ISENTO.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoJurosMora.Porcentagem">
+            <summary>
+            Se tipo = 2, definir uma porcentagem de juros >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoJurosMora.Valor">
+            <summary>
+            Se tipo = 1, definir um valor de juros >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoJurosMora.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoJurosMora"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoJurosMora.#ctor(BBNetCore.Enumerators.TipoJurosMora,System.Decimal)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoJurosMora"/>.
+            <param name="tipo">Tipo de taxa de juros.</param>
+            <param name="valorPorcentagem">Valor ou porcentagem da taxa de juros.</param>
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoMulta">
+            <summary>
+            Classe que representa os dados de multa que incedem sobre o boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoMulta.Tipo">
+            <summary>
+            Como a multa será concedida, inteiro >= 0.
+            Domínios: 0 - DISPENSAR; 1 - VALOR FIXO; 2 - PERCENTUAL;.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoMulta.Data">
+            <summary>
+            Se tipo > 0, definir uma data de multa, no formato "dd.mm.aaaa"
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoMulta.Porcentagem">
+            <summary>
+            Se tipo = 2, definir uma porcentagem >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoMulta.Valor">
+            <summary>
+            Se tipo = 1, definir um valor >= 0.00 (formato decimal separado por ".").
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoMulta.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoMulta"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoMulta.#ctor(BBNetCore.Enumerators.TipoMulta,System.Decimal,System.DateTime)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoMulta"/>.
+            <param name="tipo">Tipo de multa.</param>
+            <param name="valorPorcentagem">Valor ou porcentagem da multa.</param>
+            <param name="data">Data a partir da qual será cobrada a multa. Deve ser posterior a data de vencimento do boleto.</param>
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosBoletoPagador">
+            <summary>
+            Clase que representa os dados do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.TipoInscricao">
+            <summary>
+            Código que identifica o tipo de inscrição do Pagador.
+            Domínios: 1 - CPF; 2 - CNPJ
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.NumeroInscricao">
+            <summary>
+            Número de inscrição do pagador. Para o tipo = 1, informar numero do CPF. Para o tipo = 2, informar numero do CNPJ.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.Nome">
+            <summary>
+            Nome do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.Endereco">
+            <summary>
+            Endereço do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.CEP">
+            <summary>
+            Código postal do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.Cidade">
+            <summary>
+            Cidade do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.Bairro">
+            <summary>
+            Bairro do pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.UF">
+            <summary>
+            Sigla do unidade federativa em que o pagador vive.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosBoletoPagador.Telefone">
+            <summary>
+            Número de telefone do pagador.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoPagador.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoPagador"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosBoletoPagador.#ctor(BBNetCore.Enumerators.TipoInscricao,System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosBoletoPagador"/>.
+            </summary>
+            <param name="tipoInscricao">Tipo de inscrição da pessoa, física ou jurídica.</param>
+            <param name="numeroInscricao">Número do documento de inscrição (CPF ou CNPJ).</param>
+        </member>
+        <member name="T:BBNetCore.Models.DadosCalendario">
+            <summary>
+            Classe contendo informações a respeito de controle de tempo da cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosCalendario.Criado">
+            <summary>
+            Data de Criação. Timestamp que indica o momento em que foi criada a cobrança. Respeita o formato definido na RFC 3339.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosCalendario.SegundosExpiracao">
+            <summary>
+            Tempo de vida da cobrança, especificado em segundos a partir da data de criação (Calendario.criacao). Default: 86400
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosCalendario.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosCalendario"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosCalendario.#ctor(System.Int32)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosCalendario"/>.
+            </summary>
+            <param name="segundosExpiracao">Tempo de vida da cobrança</param>
+        </member>
+        <member name="T:BBNetCore.Models.DadosDataDevolucaoPix">
+            <summary>
+            Classe que representa os horários da devolução.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDataDevolucaoPix.DataSolicitacao">
+            <summary>
+            Horário no qual a devolução foi solicitada no PSP.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDataDevolucaoPix.DataLiquidacao">
+            <summary>
+            Horário no qual a devolução foi liquidada no PSP.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosDevedor">
+            <summary>
+            Classe contendo dados que identificam o devedor, ou seja, a pessoa ou a instituição a quem a cobrança está endereçada.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevedor.Cnpj">
+            <summary>
+            CNPJ do devedor, para cobranças de pessoa juridica.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevedor.Cpf">
+            <summary>
+             CPF do devedor, para cobranças de pessoa fisca.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevedor.Nome">
+            <summary>
+            Nome do devedor
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosDevedor.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosDevedor"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosDevedor.#ctor(System.String,System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosDevedor"/>.
+            </summary>
+            <param name="documento">CPF ou CNPJ do devedor</param>
+            <param name="nome">Nome do devedor</param>
+        </member>
+        <member name="T:BBNetCore.Models.DadosDevolucaoPix">
+            <summary>
+            Classe que representa os dados de uma cobrança imediata para solicitar uma devolução.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucaoPix.Valor">
+            <summary>
+            Valor original da cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucaoPix.EndToEndId">
+            <summary>
+            Representa o ID fim a fim da transação que transita na PACS002, PACS004 e PACS008.
+            O e2eid fica disponível após uma cobrança estar concluída e você pode encontrá-lo no response da consulta da cobrança get/cob
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucaoPix.Id">
+            <summary>
+            ID que representa uma devolução e é único por CPF/CNPJ do usuário recebedor.
+            O objetivo desse campo é ser um elemento que possibilite ao usuário recebedor a funcionalidade de conciliação de pagamentos.
+            O ID é criado exclusivamente pelo usuário recebedor e está sob sua responsabilidade
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosDevolucoes">
+            <summary>
+            Classe que representa uma devolução.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.Id">
+            <summary>
+            Id gerado pelo cliente para representar unicamente uma devolução
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.DevolucaoId">
+            <summary>
+            Id da devolução que transita na PACS004.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.Valor">
+            <summary>
+            Valor a devolver
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.DataDevolucao">
+            <summary>
+            Horário da devolução
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.StatusDevolucao">
+            <summary>
+            Status da devolução.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosDevolucoes.Descricao">
+            <summary>
+            Descrição do status da devolução
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosInformacoesAdicionais">
+            <summary>
+            Classe contendo informações adicionais
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosInformacoesAdicionais.Nome">
+            <summary>
+            Nome do campo.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosInformacoesAdicionais.Dados">
+            <summary>
+            Dados do campo.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosLocalizacao">
+            <summary>
+            Classe contendo informações da localização do payload.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosLocalizacao.Id">
+            <summary>
+            Id da location
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosLocalizacao.LocalizacaoPayload">
+            <summary>
+            Localização do payload. Example: http://pix.example.com/qr/v2/2353c790eefb11eaadc10242ac120002
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosLocalizacao.Tipo">
+            <summary>
+            Tipo da cobrança
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosPagamentoPix">
+            <summary>
+            Classe que representa os dados de um pagamento.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.EndToEndId">
+            <summary>
+            Id fim a fim da transação
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.TransacaoId">
+            <summary>
+            Identificador da transação.
+            <para>
+            O campo txid, obrigatório, determina o identificador da transação.
+            O objetivo desse campo é ser um elemento que possibilite ao PSP do
+            recebedor apresentar ao usuário recebedor a funcionalidade de conciliação de pagamentos.
+            </para>
+            <para>
+            Na pacs.008, é referenciado como TransacaoIdentification ou idConciliacaoRecebedor.
+            </para>
+            <para>
+            Em termos de fluxo de funcionamento, o txid é lido pelo aplicativo do PSP do pagador e,
+            depois de confirmado o pagamento, é enviado para o SPI via pacs.008.
+            Uma pacs.008 também é enviada ao PSP do recebedor, contendo, além de
+            todas as informações usuais do pagamento, o txid. Ao perceber um recebimento dotado de txid,
+            o PSP do recebedor está apto a se comunicar com o usuário recebedor,
+            informando que um pagamento específico foi liquidado.
+            </para>
+            <para>
+            O txid é criado exclusivamente pelo usuário recebedor e está sob sua responsabilidade.
+            O txid, no contexto de representação de uma cobrança, é único por CPF/CNPJ do usuário recebedor.
+            Cabe ao PSP recebedor validar essa regra na API PixPaid.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.Valor">
+            <summary>
+            Valor do PixPaid.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.DataProcessamento">
+            <summary>
+            Horário em que o PixPaid foi processado no PSP.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.InfoPagador">
+            <summary>
+            Informação livre do pagador
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPagamentoPix.devolucoes">
+            <summary>
+            Dados da devolução
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosPix">
+            <summary>
+            Classe que representa os dados enviados para criação ou alteração da cobrança imediata.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.Calendar">
+            <summary>
+            Informações a respeito de controle de tempo da cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.TransacaoId">
+            <summary>
+            Identificador da transação.
+            <para>
+            O campo txid, obrigatório, determina o identificador da transação.
+            O objetivo desse campo é ser um elemento que possibilite ao PSP do
+            recebedor apresentar ao usuário recebedor a funcionalidade de conciliação de pagamentos.
+            </para>
+            <para>
+            Na pacs.008, é referenciado como TransacaoIdentification ou idConciliacaoRecebedor.
+            </para>
+            <para>
+            Em termos de fluxo de funcionamento, o txid é lido pelo aplicativo do PSP do pagador e,
+            depois de confirmado o pagamento, é enviado para o SPI via pacs.008.
+            Uma pacs.008 também é enviada ao PSP do recebedor, contendo, além de
+            todas as informações usuais do pagamento, o txid. Ao perceber um recebimento dotado de txid,
+            o PSP do recebedor está apto a se comunicar com o usuário recebedor,
+            informando que um pagamento específico foi liquidado.
+            </para>
+            <para>
+            O txid é criado exclusivamente pelo usuário recebedor e está sob sua responsabilidade.
+            O txid, no contexto de representação de uma cobrança, é único por CPF/CNPJ do usuário recebedor.
+            Cabe ao PSP recebedor validar essa regra na API PixPaid.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.Revisao">
+            <summary>
+            Revisão da cobrança. Sempre começa em zero. Sempre varia em acréscimos de 1.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.Localizacao">
+            <summary>
+            Identificador da localização do payload.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.LocalizacaoPayload">
+            <summary>
+            Localização do payload
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.StatusCobranca">
+            <summary>
+            BillingStatus da Cobrança
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.Devedor">
+            <summary>
+            Identificam o devedor, ou seja, a pessoa ou a instituição a quem a cobrança está endereçada.
+            Não identifica, necessariamente, quem irá efetivamente realizar o pagamento.
+            Um CPF pode ser o devedor de uma cobrança, mas pode acontecer de outro CPF realizar, efetivamente, o pagamento do documento.
+            Não é permitido que o campo devedor.cpf e campo devedor.cnpj estejam preenchidos ao mesmo tempo.
+            Se o campo devedor.cnpj está preenchido, então o campo devedor.cpf não pode estar preenchido, e vice-versa.
+            Se o campo devedor.nome está preenchido, então deve existir ou um devedor.cpf ou um campo devedor.cnpj preenchido.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.Valores">
+            <summary>
+            Valores monetários referentes à cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.ChavePix">
+            <summary>
+            Chave DICT do recebedor
+            <remarks>
+            <para>
+            Formato do campo chave
+            </para>
+            <para>O campo chave, obrigatório, determina a chave PixPaid registrada no DICT que será utilizada para a cobrança.
+            Essa chave será lida pelo aplicativo do PSP do pagador para consulta ao DICT,
+            que retornará a informação que identificará o recebedor da cobrança.
+            </para>
+            <para>
+            Os tipos de chave podem ser: telefone, e-mail, cpf/cnpj ou EVP.
+            </para>
+            <para>
+            O formato das chaves pode ser encontrado na seção "Formatação das chaves do DICT no BR Code"
+            do Manual de Padrões para iniciação do PixPaid(https://www.bcb.gov.br/estabilidadefinanceira/pix).
+            </para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.DecricaoCobranca">
+            <summary>
+            Solicitação ao pagador
+            <para>
+            O campo solicitacaoPagador, opcional, determina um texto a ser apresentado ao pagador para que
+            ele possa digitar uma informação correlata, em formato livre, a ser enviada ao recebedor.
+            Esse texto será preenchido, na pacs.008, pelo PSP do pagador, no campo RemittanceInformation.
+            O tamanho do campo na pacs.008 está limitado a 140 caracteres.
+            </para>
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.InformacoesAdicionais">
+            <summary>
+            Informações adicionais. Cada respectiva informação adicional contida na lista (nome e valor) deve ser apresentada ao pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.PixCopiaCola">
+            <summary>
+            Conteudo da imagem do QR Code para usar no copiar e colar.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosPix.DadosPagamentoPix">
+            <summary>
+            Dados de pagamento efetuado
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.DadosValores">
+            <summary>
+            Valores monetários referentes à cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.DadosValores.Valor">
+            <summary>
+            Valor original da cobrança.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosValores.#ctor">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosValores"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Models.DadosValores.#ctor(System.Decimal)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Models.DadosValores"/>.
+            </summary>
+            <param name="valor">Valor da cobrança</param>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaBoleto">
+            <summary>
+            Classe que representa os dados de resposta de uma solicitação de criação de boletos bancários.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.Numero">
+            <summary>
+            Identificador exclusivo do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.NumeroCarteira">
+            <summary>
+            Número da carteira do convênio de cobrança
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.VariacaoCarteira">
+            <summary>
+            Número da variação da carteira do convênio de cobrança
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.CodigoCliente">
+            <summary>
+            Identificação do cliente.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.LinhaDigitavel">
+            <summary>
+            Linha digitável do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.CodigoBarras">
+            <summary>
+            Define o código de barras numérico do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.NumeroContrato">
+            <summary>
+            Define o número do contrato de cobrança do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.Beneficiario">
+            <summary>
+            Define os dados do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoleto.QrCode">
+            <summary>
+            Define os dados do pix do boleto.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaBoletoBeneficiario">
+            <summary>
+            Clase que representa os dados do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.Agencia">
+            <summary>
+            Agência do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.ContaCorrente">
+            <summary>
+            Número da conta corrente do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.TipoEndereco">
+            <summary>
+            Código do tipo de endereço do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.Logradouro">
+            <summary>
+            Nome do logradouro do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.Bairro">
+            <summary>
+            Bairro do Beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.Cidade">
+            <summary>
+            Cidade do Beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.CodigoCidade">
+            <summary>
+            Identificador da cidade do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.UF">
+            <summary>
+            Sigla do Estado do beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.CEP">
+            <summary>
+            Código Postal do Beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoBeneficiario.ProvaDeVida">
+            <summary>
+            Indicador de prova de vida do beneficiário.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaBoletoManualPix">
+            <summary>
+            Classe que representação dos campos de resposta de uma solicitação de pix vinculado a boleto bancário registrado por troca de arquivo.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoManualPix.ChavePagadorPix">
+            <summary>
+            Código chave do beneficiário do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoManualPix.Url">
+            <summary>
+            URL do payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoManualPix.TransacaoId">
+            <summary>
+            Código que identifica a transação Pix - transactionID.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoManualPix.CodigoEmv">
+            <summary>
+            BR Code no padrão EMV. Sequência de caracteres correspondente ao payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaBoletoPix">
+            <summary>
+            Classe que representação dos campos de resposta de uma solicitação de pix vinculado a boleto bancário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.NossoNumero">
+            <summary>
+            Número de identificação do boleto (correspondente ao NOSSO NÚMERO, numeroTituloCliente), no formato STRING,
+            com 20 dígitos, que deverá ser formatado da seguinte forma:
+            “000” + (número do convênio com 7 dígitos) + (10 algarismos - se necessário, completar com zeros à esquerda).
+            Campo Obrigatório.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.DataRegistroTitulo">
+            <summary>
+            Data de registro do boleto no banco.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.AgenciaBeneficiario">
+            <summary>
+            Número da agência do beneficiário, sem o dígito verificador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.ContaBeneficiario">
+            <summary>
+            Número da conta do beneficiário, sem o dígito verificador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.Valor">
+            <summary>
+            Valor original do boleto indicado quando do registro.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.Vencimento">
+            <summary>
+            Data de validade do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.Pix">
+            <summary>
+            Dados do PIX do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoPix.QrCode">
+            <summary>
+            Dados do QR Code do boleto.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.PixBoleto">
+            <summary>
+            Classe que representa os dados do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.ChavePagador">
+            <summary>
+            Código chave do pagador do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.ValorPago">
+            <summary>
+            Valor recebido via Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.Pagamento">
+            <summary>
+            Data e hora do recebimento via Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.DescricaoRetorno">
+            <summary>
+            Texto da mensagem de retorno do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.CodigoBancoPagador">
+            <summary>
+            Código identificador da instituição do pagador do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.AgenciaPagador">
+            <summary>
+            Prefixo da agência do pagador do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.ContaPagador">
+            <summary>
+            Número da conta corrente do pagador do Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.TipoPessoaPagador">
+            <summary>
+            Código do tipo de pessoa do pagador do Pix.
+            Este valor pode ser 1 para Pessoa Física ou 2 para Pessoa Jurídica.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.PixBoleto.DocumentoPagador">
+            <summary>
+            Número do CPF ou CNPJ do pagador do Pix.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.QrCodeBoleto">
+            <summary>
+            Classe que representa os dados gerados do QR Code.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.QrCodeBoleto.Url">
+            <summary>
+            URL do payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.QrCodeBoleto.TransacaoId">
+            <summary>
+            Código que identifica a transação Pix - transactionID.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.QrCodeBoleto.CodigoEmv">
+            <summary>
+            BR Code no padrão EMV. Sequência de caracteres correspondente ao payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.QrCodeBoleto.Tipo">
+            <summary>
+            Código do tipo de QR Code do Pix.
+            Este valor pode ser 1 para Estático ou 2 para Dinâmico.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaBoletoQrCode">
+            <summary>
+            Clase que representa os dados do Pix do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoQrCode.Url">
+            <summary>
+            URL do payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoQrCode.TransacaoId">
+            <summary>
+            Codigo que identifica a transação Pix - transactionID
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaBoletoQrCode.CodigoEmv">
+            <summary>
+            BR Code no padrão EMV. Sequência de caracteres correspondente ao payload do QR Code Pix.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaCancelaBoleto">
+            <summary>
+            Classe que representa a resposta da baixa de boletos.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaCancelaBoleto.NumeroContrato">
+            <summary>
+            Número do contrato de cobrança do boleto bancário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaCancelaBoleto.Data">
+            <summary>
+            Data do pedido de baixa do boleto bancário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaCancelaBoleto.Horario">
+            <summary>
+            Horário do pedido de baixa do boleto bancário.HH:mm:ss
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaConsultaBoleto">
+            <summary>
+            Classe que representa os dados de resposta de uma solicitação de detalhamento de boletos bancários.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.LinhaDigitavel">
+            <summary>
+            Campo correpondente à linha digitável do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.textoEmailPagador">
+            <summary>
+            E-mail do Pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.MensagemImpressaBoleto">
+            <summary>
+            Mensagem para ser impressa no boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoMulta">
+            <summary>
+            Código para identificação do tipo de multa para o Título de Cobrança.
+            Domínios: 0 - Sem multa 1 - Valor da Multa 2 - Percentual da Multa.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.FormaPagamento">
+            <summary>
+            Código para identificação da forma de pagamento que foi pago o boleto.
+            O primeiro dígito é:
+            1 Espécie
+            2 Débito em conta
+            3 Cartão de crédito
+            4 Cheque
+            <para></para>
+            Os dois últimos:
+            01 Agencias - Postos tradicionais
+            02 Terminal de Auto-atendimento
+            03 Internet (home / office banking)
+            05 Correspondente bancário
+            06 Central de atendimento(Call Center)
+            07 Arquivo Eletrônico
+            08 DDA
+            61 Pix
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NumeroContrato">
+            <summary>
+            Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoInscricao">
+            <summary>
+            Código que identifica o tipo de inscrição da Empresa ou Pessoa Física perante uma Instituição governamental.
+            Domínios: 1 - CPF 2 - CNPJ
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NumeroInscricao">
+            <summary>
+            Número de inscrição da Empresa ou Pessoa Física perante uma Instituição governamental.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.SituacaoBoleto">
+            <summary>
+            Código da situação atual do boleto.
+            Domínios:
+            1 - NORMAL
+            2 - MOVIMENTO CARTORIO
+            3 - EM CARTORIO
+            4 - TITULO COM OCORRENCIA DE CARTORIO
+            5 - PROTESTADO ELETRONICO
+            6 - LIQUIDADO
+            7 - BAIXADO
+            8 - TITULO COM PENDENCIA DE CARTORIO
+            9 - TITULO PROTESTADO MANUAL
+            10 - TITULO BAIXADO/PAGO EM CARTORIO
+            11 - TITULO LIQUIDADO/PROTESTADO
+            12 - TITULO LIQUID/PGCRTO
+            13 - TITULO PROTESTADO AGUARDANDO BAIXA
+            14 - TITULO EM LIQUIDACAO
+            15 - TITULO AGENDADO
+            16 - TITULO CREDITADO
+            17 - PAGO EM CHEQUE - AGUARD.LIQUIDACAO
+            18 - PAGO PARCIALMENTE
+            19 - PAGO PARCIALMENTE CREDITADO
+            21 - TITULO AGENDADO COMPE
+            80 - EM PROCESSAMENTO (ESTADO TRANSITÓRIO)
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoTitulo">
+            <summary>
+            Código para identificar o tipo de boleto de cobrança.
+            Domínios:
+            1 - CHEQUE 2 - DUPLICATA MERCANTIL 3 - DUPLICATA MTIL POR INDICACAO 4 - DUPLICATA DE SERVICO
+            5 - DUPLICATA DE SRVC P/INDICACAO 6 - DUPLICATA RURAL 7 - LETRA DE CAMBIO 8 - NOTA DE CREDITO COMERCIAL
+            9 - NOTA DE CREDITO A EXPORTACAO 10 - NOTA DE CREDITO INDULTRIAL 11 - NOTA DE CREDITO RURAL
+            12 - NOTA PROMISSORIA 13 - NOTA PROMISSORIA RURAL 14 - TRIPLICATA MERCANTIL 15 - TRIPLICATA DE SERVICO
+            16 - NOTA DE SEGURO 17 - RECIBO 18 - FATURA 19 - NOTA DE DEBITO 20 - APOLICE DE SEGURO 21 - MENSALIDADE ESCOLAR
+            22 - PARCELA DE CONSORCIO 23 - DIVIDA ATIVA DA UNIAO 24 - DIVIDA ATIVA DE ESTADO 25 - DIVIDA ATIVA DE MUNICIPIO
+            31 - CARTAO DE CREDITO 32 - BOLETO PROPOSTA 99 - OUTROS
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.codigoModalidadeTitulo">
+            <summary>
+            Código para identificar a característica dos boletos dentro das modalidades de cobrança existentes no banco.
+            Domínios: 1 - SIMPLES 4 - VINCULADA
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.codigoAceiteTituloCobranca">
+            <summary>
+            Código para identificar se o boleto de cobrança foi aceito (reconhecimento da dívida pelo Pagador).
+            Domínios: A - ACEITE N - NAO ACEITE
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CodigoPrefixoDependenciaCobrador">
+            <summary>
+            Código agência da praça do pagador (endereço).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.codigoIndicadorEconomico">
+            <summary>
+            Código para identificar a moeda referenciada no boleto.
+            Domínios: 0 - NENHUM 1 - FAJTR 2 - DOLAR 3 - EURO 4 - IENE 5 - MARCO ALEMAO 6 - FTR 7 - IDTR 8 - UFIR
+            9 - REAL 10 - SELIC 11 - IGP-M 12 - INPC 13 - TR (BESC)
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.SeuNumero">
+            <summary>
+            Campo destinado para uso da Empresa Beneficiário para identificação do boleto.
+            Equivalente ao SEU NÚMERO ou ao numeroTituloBeneficiario do request do registro
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoJurosMora">
+            <summary>
+            Código utilizado pela FEBRABAN para identificar o tipo de taxa de juros.
+            Domínios: 0 - DISPENSAR 1 - VALOR DIA ATRASO 2 - TAXA MENSAL 3 - ISENTO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataEmissao">
+            <summary>
+            Data de emissão do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataRegistrado">
+            <summary>
+            Data de registro do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataVencimento">
+            <summary>
+            Data de vencimento do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.Valor">
+            <summary>
+            Valor original do boleto indicado quando do registro.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorAtual">
+            <summary>
+            Valor atualizado do boleto, considerando possíveis multa, juros, mora, descontos, etc., que incidiram sob o valor original
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorPagamento">
+            <summary>
+            Valores já recebidos em pagamentos parciais.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorAbatimento">
+            <summary>
+            Valor do abatimento (redução do valor do documento, devido a algum problema), expresso em moeda corrente.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualImposto">
+            <summary>
+            Percentual do IOF - Imposto sobre Operações Financeiras - de um boleto prêmio de seguro na sua data de emissão, expresso de acordo com o tipo de moeda.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorImposto">
+            <summary>
+            Valor do IOF - Imposto sobre Operações Financeiras - de um boleto prêmio de seguro na sua data de emissão, expresso de acordo com o tipo de moeda.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorMoeda">
+            <summary>
+            Valor do boleto expresso em moeda variável.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualJuroMora">
+            <summary>
+            Porcentagem sobre o valor do boleto a ser cobrada de juros de mora.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorJuroMora">
+            <summary>
+            Valor sobre o valor do boleto a ser cobrado de juros de mora.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualMulta">
+            <summary>
+            Porcentagem sobre o valor do boleto a ser cobrada de multa.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorMulta">
+            <summary>
+            Valor sobre o valor do boleto a ser cobrado de multa.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.QuantidadeParcela">
+            <summary>
+            Quantidade de parcela do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataBaixaAutomatica">
+            <summary>
+            Data da baixa automática do boleto, conforme cadastrado no convênio.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ObservacoesUtilizacaoCedente">
+            <summary>
+            Texto de observações destinado ao envio de mensagens livres, a serem impressas no campo de instruções da ficha de compensação do Boleto de Pagamento.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CobrancaPartilhada">
+            <summary>
+            Código para identificação de Rateio de Crédito (partilhamento).
+            Domínios: S - SIM  N - NÃO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NomeSacado">
+            <summary>
+            Nome que identifica a pessoa, física ou jurídica, a qual se quer fazer referência.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.EnderecoSacado">
+            <summary>
+            Texto referente a localização da rua/avenida, número, complemento para entrega de correspondência.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.BairroSacado">
+            <summary>
+            Texto referente ao bairro para entrega de correspondência.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.MunicipioSacado">
+            <summary>
+            Texto referente ao nome do município componente do endereço utilizado para entrega de correspondência.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.UnidadeFederacaoSacado">
+            <summary>
+            Código do estado, unidade da federação componente do endereço utilizado para entrega de correspondência.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CepSacado">
+            <summary>
+            Código adotado pelos Correios, para identificação de logradouros.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorMoedaAbatimento">
+            <summary>
+            Valor da moeda do abatimento.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataProtesto">
+            <summary>
+            Data para inicialização do processo de cobrança via protesto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoInscricaoSacador">
+            <summary>
+            Código que identifica o tipo de inscrição do Beneficiário original do boleto de cobrança.
+            Domínios: 1 - CPF 2 - CNPJ
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NumeroInscricaoSacadorAvalista">
+            <summary>
+            Número de inscrição do Beneficiário original do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NomeSacadorAvalista">
+            <summary>
+            Nome que identifica a entidade, pessoa física ou jurídica, Beneficiário original do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualDesconto">
+            <summary>
+            Percentual de desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataDesconto">
+            <summary>
+            Data limite do desconto do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorDescontoTitulo">
+            <summary>
+            Valor de desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoDesconto">
+            <summary>
+            Código para identificação do tipo de desconto que deverá ser concedido.
+            Domínios:
+            0 - SEM DESCONTO
+            1 - VLR FIXO ATE A DATA INFORMADA
+            2 - PERCENTUAL ATE A DATA INFORMADA
+            3 - DESCONTO POR DIA DE ANTECIPACAO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualSegundoDesconto">
+            <summary>
+            Percentual do segundo desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataSegundoDesconto">
+            <summary>
+            Data limite do segundo desconto do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorSegundoDesconto">
+            <summary>
+            Valor do segundo desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoSegundoDesconto">
+            <summary>
+            Código para identificação do tipo do segundo desconto que deverá ser concedido.
+            Domínios:
+            0 - SEM DESCONTO
+            1 - VLR FIXO ATE A DATA INFORMADA
+            2 - PERCENTUAL ATE A DATA INFORMADA
+            3 - DESCONTO POR DIA DE ANTECIPACAO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PercentualTerceiroDesconto">
+            <summary>
+            Percentual do terceiro desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataTerceiroDesconto">
+            <summary>
+            Data limite do terceiro desconto do boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorTerceiroDesconto">
+            <summary>
+            Valor do terceiro desconto a ser concedido sobre o boleto de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoTerceiroDesconto">
+            <summary>
+            Código para identificação do tipo do terceiro desconto que deverá ser concedido.
+            Domínios:
+            0 - SEM DESCONTO
+            1 - VLR FIXO ATE A DATA INFORMADA
+            2 - PERCENTUAL ATE A DATA INFORMADA
+            3 - DESCONTO POR DIA DE ANTECIPACAO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataMulta">
+            <summary>
+            Data para início da cobrança da multa.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.Carteira">
+            <summary>
+            Número da carteira do convênio de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.VariacaoCarteira">
+            <summary>
+            Número da variação da carteira do convênio de cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.QtdDiasProtesto">
+            <summary>
+            Número de dias decorrentes após a data de vencimento para inicialização do processo de cobrança via protesto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.QtdDiaPrazoLimiteRecebimento">
+            <summary>
+            Número de dias corridos para recebimento do boleto após a data de vencimento.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataLimiteRecebimento">
+            <summary>
+            Data limite para recebimento do boleto após a data de vencimento.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.PermiteRecebimentoParcial">
+            <summary>
+            Código para identificação da autorização de pagamento parcial do boleto.
+            Domínios: S - SIM N - NAO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CodigoBarras">
+            <summary>
+            Código de barras do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.OcorrenciasCartorio">
+            <summary>
+            Código para identificação das ocorrências de retorno do cartório.
+            Domínios:
+            0 - TITULO PROTOCOLADO - ANTIGO "TEC"
+            1 - TITULO PAGO EM CARTORIO
+            2 - TITULO PROTESTADO - ANTIGO "DDP"
+            3 - TITULO RETIRADO CARTORIO - ANT. DDS
+            4 - TITULO SUSTADO JUDICIALMENTE
+            5 - TITULO RECUSADO SEM CUSTAS
+            6 - TITULO RECUSADO COM CUSTAS
+            7 - TITULO PAGO LIQUIDACAO CONDICIONAL
+            8 - TITULO ACEITO
+            9 - CUSTAS DE EDITAL
+            20 - LQ. CARTORIO AG. SEMI-AUTOM.
+            21 - CHQ DEVOLV. TIT. ENC. PROT.
+            22 - TITULO SUSTADO DEFINITIVO
+            23 - RETIRADA APÓS SUSTAÇÃO JUDICIAL
+            59 - PAGTO CONDICIONAL VIA SELTEC
+            60 - TITULO PAGO EM CARTORIO-SELTEC
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorImpostoRecebido">
+            <summary>
+            Valor do IOF recebido.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorAbatimentoTotal">
+            <summary>
+            Valor do abatimento concedido.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorJuroMoraRecebido">
+            <summary>
+            Valor dos juros recebidos.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorDescontoUtilizado">
+            <summary>
+            Valor de desconto utilizado pelo pagador.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorPagoSacado">
+            <summary>
+            Valor pago.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorCreditado">
+            <summary>
+            Valor líquido creditado ao beneficiário.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.TipoLiquidacao">
+            <summary>
+            Código para identificação do tipo de liquidação.
+            Domínios: 1 CAIXA 2 VIA COMPE 3 EM CARTORIO 4 PIX 5 TITULO EM LIQUIDACAO - ORIGEM AGE
+            6 TITULO EM LIQUIDACAO - PGT 7 BANCO POSTAL 8 TITULO LIQUIDADO VIA COMPE/STR
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataCreditoLiquidacao">
+            <summary>
+            Data a qual será creditado o valor inerente ao título (este campo só será preenchido após a liquidação, ou seja,
+            após codigoEstadoTituloCobranca = 6).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.DataRecebimento">
+            <summary>
+            Data para a qual foi agendado o recebimento/pagamento do título.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CodigoPrefixoDependenciaRecebedor">
+            <summary>
+            Código agência da praça do recebimento do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NaturezaRecebimento">
+            <summary>
+            Código para identificar as ocorrências (rejeições, tarifas, custas, liquidação e baixas) do boleto.
+            Domínios: 1 - NORMAL 2 - POR CONTA 3 - POR SALDO 4 - CHEQUE A COMPENSAR 7 - LIQUIDADO NA APRESENTACAO
+            8 - POR CONTA EM CARTORIO 9 - EM CARTORIO
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.NumeroIdentidadeSacado">
+            <summary>
+            Número de identidade do sacado do título.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CodigoResponsavelAtualizacao">
+            <summary>
+            Código para identificação do sistema/usuário responsável pela atualização do boleto.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.codigoTipoBaixaTitulo">
+            <summary>
+            Código para identificação do tipo de baixa do boleto.
+            Domínios:
+            1 - BAIXADO POR SOLICITACAO 2 - ENTREGA FRANCO PAGAMENTO 9 - COMANDADA BANCO 10 - COMANDADA CLIENTE - ARQUIVO
+            11 - COMANDADA CLIENTE - ON-LINE 12 - DECURSO PRAZO - CLIENTE 13 - DECURSO PRAZO - BANCO 15 - PROTESTADO
+            31 - LIQUIDADO ANTERIORMENTE 32 - HABILITADO EM PROCESSO 35 - TRANSFERIDO PARA PERDAS
+            51 - REGISTRADO INDEVIDAMENTE 90 - BAIXA AUTOMATICA
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorMultaRecebido">
+            <summary>
+             Valor de multa recebido.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.ValorReajuste">
+            <summary>
+            Valor do reajuste (índice econômico).
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.valorOutroRecebido">
+            <summary>
+            Outros valores recebidos.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaConsultaBoleto.CodigoIndicadorEconomicoInadimplencia">
+            <summary>
+            Código do índice econômico utilizado para o cálculo de juros/multa.
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaDevolucaoPix">
+            <summary>
+            Classe que representa a resposta de uma devolução da cobrança imediata.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Id">
+            <summary>
+            Id gerado pelo cliente para representar unicamente uma devolução
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.DevolucaoId">
+            <summary>
+            Id da devolução que transita na PACS004.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Valor">
+            <summary>
+            Valor a devolver
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Natureza">
+            <summary>
+            Natureza
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Descricao">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Horario">
+            <summary>
+            Horário da devolução
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.StatusDevolucao">
+            <summary>
+            Status da devolução.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaDevolucaoPix.Motivo">
+            <summary>
+            Motivo
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.RespostaPagamentoPix">
+            <summary>
+            Classe que representa os dados de uma cobrança imediata.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaPagamentoPix.Valor">
+            <summary>
+            Valor original da cobrança.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaPagamentoPix.EndToEndId">
+            <summary>
+            Representa o ID fim a fim da transação que transita na PACS002, PACS004 e PACS008.
+            O e2eid fica disponível após uma cobrança estar concluída e você pode encontrá-lo no response da consulta da cobrança get/cob
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.RespostaPagamentoPix.Id">
+            <summary>
+            ID que representa uma devolução e é único por CPF/CNPJ do usuário recebedor.
+            O objetivo desse campo é ser um elemento que possibilite ao usuário recebedor a funcionalidade de conciliação de pagamentos.
+            O ID é criado exclusivamente pelo usuário recebedor e está sob sua responsabilidade
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Models.TokenAcesso">
+            <summary>
+            Classe contendo dados de acesso a API
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.TokenAcesso.Token">
+            <summary>
+            Token de autenticação
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.TokenAcesso.TokenType">
+            <summary>
+            Tipo de token
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.TokenAcesso.ExpiresIn">
+            <summary>
+            Tempo de vida do token, especificado em segundos a partir da data de autenticação. Default: 600
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Models.TokenAcesso.Scope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BBNetCore.Pix">
+            <summary>
+            Classe que atua como cliente para os serviços pix.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Pix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
+            </summary>
+            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+        </member>
+        <member name="M:BBNetCore.Pix.Gerar(BBNetCore.Models.DadosPix)">
+            <summary>
+            Criar uma cobrança imediata, neste caso, o txid deve ser definido pelo PSP.
+            </summary>
+            <param name="requestCharge">Dados para criação da cobrança instantânea</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.GerarAsync(BBNetCore.Models.DadosPix,System.Threading.CancellationToken)">
+            <summary>
+            Criar uma cobrança imediata, neste caso, o txid deve ser definido pelo PSP como uma operação assíncrona.
+            </summary>
+            <param name="requestCharge">Dados para criação da cobrança instantânea</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.Consultar(System.String)">
+            <summary>
+            Consulta uma cobrança imediata pelo transactionId.
+            </summary>
+            <param name="transacaoId">Identificador da transação</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.ConsultarAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Consulta uma cobrança imediata pelo transactionId como uma operação assíncrona.
+            </summary>
+            <param name="transacaoId">Identificador da transação</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.Atualizar(BBNetCore.Models.DadosPix)">
+            <summary>
+            Atualiza uma cobrança imediata, neste caso, o txid deve ser definido pelo PSP.
+            </summary>
+            <param name="requestCharge">Dados para criação da cobrança instantânea</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.AtualizarAsync(BBNetCore.Models.DadosPix,System.Threading.CancellationToken)">
+            <summary>
+            Atualiza uma cobrança imediata, neste caso, o txid deve ser definido pelo PSP como uma operação assíncrona.
+            </summary>
+            <param name="requestCharge">Dados para criação da cobrança instantânea</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.Devolver(BBNetCore.Models.DadosDevolucaoPix)">
+            <summary>
+            Solicita a devolução de uma cobrança imediata, através de um e2eid do PixPaid e do ID da devolução.
+            </summary>
+            <param name="devolucao">Dados para a devolução da cobrança instantânea</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.DevolverAsync(BBNetCore.Models.DadosDevolucaoPix,System.Threading.CancellationToken)">
+            <summary>
+            Solicita a devolução de uma cobrança imediata, através de um e2eid do PixPaid e do ID da devolução como uma operação assíncrona.
+            </summary>
+            <param name="devolucao">Dados para a devolução da cobrança instantânea</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.ConsultarDevolucao(BBNetCore.Models.DadosDevolucaoPix)">
+            <summary>
+            Consulta a devolução de uma cobrança imediata, através de um e2eid do PixPaid e do ID da devolução.
+            </summary>
+            <param name="devolucao">Dados para a devolução da cobrança instantânea</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.ConsultarDevolucaoAsync(BBNetCore.Models.DadosDevolucaoPix,System.Threading.CancellationToken)">
+            <summary>
+            Consulta a devolução de uma cobrança imediata, através de um e2eid do PixPaid e do ID da devolução como uma operação assíncrona.
+            </summary>
+            <param name="devolucao">Dados para a devolução da cobrança instantânea</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados da cobrança</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.Pagar(System.String)">
+            <summary>
+            Efetua a simulação do pagamento de um QR Code gerado em homologação.
+            Recurso exclusivo do ambiente de homologação.
+            </summary>
+            <param name="qrCode">O Conteudo do campo <see cref="P:BBNetCore.Models.DadosPix.PixCopiaCola"/>, recebido na resposta da criação da cobrança</param>
+            <returns>Os dados de pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.PagarAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Efetua a simulação do pagamento de um QR Code gerado em homologação. Recurso exclusivo do ambiente de homologação como uma operação assíncrona.
+            </summary>
+            <param name="qrCode">O Conteudo do campo <see cref="P:BBNetCore.Models.DadosPix.PixCopiaCola"/>, recebido na resposta da criação da cobrança</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Os dados de pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.ConsultarPagamento(System.String)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid.
+            </summary>
+            <param name="e2eId">O Id fim a fim da transação</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Pix.ConsultarPagamentoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Consultar o pagamento de um cobrança, através de um e2eid do PixPaid como uma operação assíncrona.
+            </summary>
+            <param name="e2eId">O Id fim a fim da transação</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="T:BBNetCore.ServicosBase">
+            <summary>
+            Classe base para os serviços pix.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.ServicosBase.ConfiguracoesApiBb">
+            <summary>
+            Chave de api usada na autenticação do serviço.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.ServicosBase.TokenAccesso">
+            <summary>
+            Token de acesso para authenticação.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.ServicosBase.TipoTokenAccesso">
+            <summary>
+            Tipo do token de acesso.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.ServicosBase.ExpiracaoTokenAccesso">
+            <summary>
+            Data e hora em que o token de autenticação expira.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.ServicosBase.TipoApi">
+            <summary>
+            Tipo de serviço a ser usado pela API.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.ServicosBase.#ctor(BBNetCore.Enumerators.TipoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.ServicosBase"/>.
+            </summary>
+            <param name="tipoApi"></param>
+            <param name="configuracoesApiBb">Chave de api usada na autenticação do serviço.</param> 
+        </member>
+        <member name="M:BBNetCore.ServicosBase.CriarInstancia">
+            <summary>
+            Cria uma instancia de <see cref="T:BBNetCore.Utils.ApiHttpClient"/> pronta para auxiliar nas requisições via HttpClient.
+            </summary>
+            <returns>Uma instancia de <see cref="T:BBNetCore.Utils.ApiHttpClient"/></returns>
+        </member>
+        <member name="M:BBNetCore.ServicosBase.AutenticarAsync">
+            <summary>
+            Método de autenticação da API como uma operação assíncrona.
+            </summary>
+            <returns>Se autenticado com sucesso</returns>
+        </member>
+        <member name="T:BBNetCore.Utils.ApiHttpClient">
+            <summary>
+            Contem metodos para realizar a comunicação via HttpClient.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Utils.ApiHttpClient.UrlBase">
+            <summary>
+            Url base para a comunicação
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Utils.ApiHttpClient.Url">
+            <summary>
+            Url completa para a solicitação
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiHttpClient._requestNotAllowedStatusRange">
+            <summary>
+            Lista de status de erro da requisição.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Utils.ApiHttpClient.AuthenticationHeader">
+            <summary>
+            Contem o tipo e a chave do token de acesso para comunicação com a API.
+            </summary>
+        </member>
+        <member name="P:BBNetCore.Utils.ApiHttpClient.Certificate">
+            <summary>
+            Certficado de assinatura digital
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.#ctor(System.String)">
+            <summary>
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Utils.ApiHttpClient"/>.
+            </summary>
+            <param name="urlBase">Url base da comunicação</param>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.GetAsync``1(BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza uma consulta no endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.PostAsync``1(BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de dados para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.PostAsync``1(System.Object,BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de dados para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="obj">O objeto que sera enviado no corpo da requisição</param>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.DeleteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de um comando de DELETE para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.PatchAsync``1(BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de um comando de PATCH para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.PatchAsync``1(System.Object,BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de um comando de PATCH para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="obj">O objeto que sera enviado no corpo da requisição</param>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.PutAsync``1(System.Object,BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Realiza o envio de um comando de PUT para o endereço especificado na <see cref="P:BBNetCore.Utils.ApiHttpClient.UrlBase"/> de forma assíncrona.
+            </summary>
+            <param name="obj">O objeto que sera enviado no corpo da requisição</param>
+            <param name="mimeType">Tipo de dados</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T">O tipo de dados de retorno</typeparam>
+            <returns>Os dados</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.SendAsync(System.Net.Http.HttpMethod,System.Threading.CancellationToken)">
+            <summary>
+            Envia uma solicitação HTTP como uma operação assíncrona.
+            </summary>
+            <param name="httpMethod">O protocolo HTTP</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.SendAsync``1(System.Object,System.Net.Http.HttpMethod,BBNetCore.Enumerators.MimeTypes,System.Threading.CancellationToken)">
+            <summary>
+            Envia uma solicitação HTTP como uma operação assíncrona.
+            </summary>
+            <param name="obj">O objeto que sera enviado no corpo da requisição</param>
+            <param name="httpMethod">O protocolo HTTP</param>
+            <param name="mimeType">Tipo de dados</param> 
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.CheckIfStatusCodeIsError(System.Net.HttpStatusCode)">
+            <summary>
+            Verifica o status da solicitação.
+            </summary>
+            <param name="responseStatusCode">O status da requisição</param>
+            <returns>Se a solicitação foi bem-sucedida</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.CreateHttpException(System.Net.Http.HttpResponseMessage,System.String,System.Exception)">
+            <summary>
+            Cria uma instancia da exceção do tipo <see cref="T:BBNetCore.Exceptions.HttpException"/>. 
+            </summary>
+            <param name="response">A Mensagem de resposta, incluindo o código de status e os dados</param>
+            <param name="content">O conteudo da resposta</param>
+            <param name="ex">A exceção original</param>
+            <returns>Uma instancia de <see cref="T:BBNetCore.Exceptions.HttpException"/></returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.GetMineType(BBNetCore.Enumerators.MimeTypes)">
+            <summary>
+            Retorna o tipo de conteudo(MIME-type) que sera usado na requisição. 
+            </summary>
+            <param name="mimeType">O tipo de conteudo(MIME-type)</param>
+        </member>
+        <member name="T:BBNetCore.Utils.PixHttpClientHelper">
+            <summary>
+            Contem metodos para utilizar a classe <see cref="T:BBNetCore.Utils.ApiHttpClient"/>.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Utils.PixHttpClientHelper.PrepareClient(BBNetCore.Utils.ApiHttpClient,System.String,System.String[])">
+            <summary>
+            Gera a url com a chave do App.
+            </summary>
+            <param name="client"></param>
+            <param name="endPoint">O endpoint da requisição</param>
+            <param name="query">Paramatros que seram adicionados na url</param>
+            <returns>A url pronta pra requisição</returns>
+        </member>
+        <member name="T:BBNetCore.Utils.ApiUrlBase">
+            <summary>
+            Classe que contem as ulr's padrões conforme o ambiente definido.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.SANDBOX_BASE_URL">
+            <summary>
+            URL padrão do serviço de sandbox.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.SANDBOX_OAUTH_URL">
+            <summary>
+            URL de autenticação padrão do serviço de sandbox.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.PRODUCTION_BASE_URL">
+            <summary>
+            Url padrão do serviço de produção.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.PRODUCTION_BASE_URL_PIX">
+            <summary>
+            Url padrão do serviço PIX V2 em produção.
+            </summary>
+        </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.PRODUCTION_OAUTH_URL">
+            <summary>
+            URL de autenticação padrão do serviço de produção.
+            </summary>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetBaseUri(BBNetCore.Enumerators.AmbienteApi,BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
+            <summary>
+            Método que traz a url correta de acordo com a versão e ambiente definidos.
+            </summary>
+            <param name="environment">Ambiente de execução. <see cref="T:BBNetCore.Enumerators.AmbienteApi"/></param>
+            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
+            <param name="version">Versão da API</param>
+            <returns>Url correta da API</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetUrlBaseProducao(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
+            <summary>
+            Método que identifica a url base de produção, com base no tipo do serviço da API.
+            </summary>
+            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
+            <param name="version">Versão da API</param>
+            <returns>A url base</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetTipoApi(BBNetCore.Enumerators.TipoApi)">
+            <summary>
+            Método que identifica a path que compoem a url da API, com base no tipo do serviço da API.
+            </summary>
+            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
+            <returns>Path que compoem a url da API</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetApiVersion(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
+            <summary>
+            Método que identifica a versão da API com base no tipo de serviço.
+            </summary>
+            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
+            <param name="version">Versão da API</param>
+            <returns>Path que compoem a url da API</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetOauthUri(BBNetCore.Enumerators.AmbienteApi)">
+            <summary>
+            Método que traz a url de autenticação correta de acordo com a versão e ambiente definidos.
+            </summary>
+            <param name="environment">Ambiente de execução.<see cref="T:BBNetCore.Enumerators.AmbienteApi"/></param>
+            <returns>Url correta da API de autenticação</returns>
+        </member>
+    </members>
+</doc>
