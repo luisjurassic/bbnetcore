@@ -9,11 +9,10 @@
             Classe que atua como cliente para os serviços boletos.
             </summary>
         </member>
-        <member name="M:BBNetCore.Boleto.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.Boleto.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.Boleto"/>.
             </summary>
-            <param name="versaoApi">Versão da API.</param> 
             <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.Boleto.Gerar(BBNetCore.Models.DadosBoleto)">
@@ -70,11 +69,10 @@
             Classe que atua como cliente para os serviços boletos.
             </summary>
         </member>
-        <member name="M:BBNetCore.BoletoPix.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.BoletoPix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.BoletoPix"/>.
             </summary>
-            <param name="versaoApi">Versão da API.</param> 
             <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.BoletoPix.Gerar(System.String,System.Int32)">
@@ -1791,21 +1789,6 @@
         <member name="F:BBNetCore.Enumerators.TipoTitulo.Outros">
             <summary>
             Outros tipos de documentos não listados.
-            </summary>
-        </member>
-        <member name="T:BBNetCore.Enumerators.VersaoApi">
-            <summary>
-            Enumerador com as versões disponíveis da API do PIX.
-            </summary>
-        </member>
-        <member name="F:BBNetCore.Enumerators.VersaoApi.V1">
-            <summary>
-            Versão 1
-            </summary>
-        </member>
-        <member name="F:BBNetCore.Enumerators.VersaoApi.V2">
-            <summary>
-            Versão 2
             </summary>
         </member>
         <member name="T:BBNetCore.Exceptions.ApiException">
@@ -3688,11 +3671,10 @@
             Classe que atua como cliente para os serviços pix.
             </summary>
         </member>
-        <member name="M:BBNetCore.Pix.#ctor(BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.Pix.#ctor(BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.Pix"/>.
             </summary>
-            <param name="versaoApi">Versão da API.</param> 
             <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.Pix.Gerar(BBNetCore.Models.DadosPix)">
@@ -3831,17 +3813,11 @@
             Tipo de serviço a ser usado pela API.
             </summary>
         </member>
-        <member name="P:BBNetCore.ServicosBase.VersaoApi">
-            <summary>
-            Versão da API do PIX.
-            </summary>    
-        </member>
-        <member name="M:BBNetCore.ServicosBase.#ctor(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi,BBNetCore.Models.ConfiguracoesApiBB)">
+        <member name="M:BBNetCore.ServicosBase.#ctor(BBNetCore.Enumerators.TipoApi,BBNetCore.Models.ConfiguracoesApiBB)">
             <summary>
             Inicializa uma nova instância da classe <see cref="T:BBNetCore.ServicosBase"/>.
             </summary>
             <param name="tipoApi">Tipo de serviço</param>
-            <param name="versaoApi">Versão da API</param>
             <param name="configuracoesApiBb">Configurações do serviço.</param> 
         </member>
         <member name="M:BBNetCore.ServicosBase.CriarInstancia">
@@ -3955,6 +3931,12 @@
             <typeparam name="T">O tipo de dados de retorno</typeparam>
             <returns>Os dados</returns>
         </member>
+        <member name="M:BBNetCore.Utils.ApiHttpClient.CreateHttpClient">
+            <summary>
+            Cria o client base para as requisições.
+            </summary>
+            <returns>O client base</returns>
+        </member>
         <member name="M:BBNetCore.Utils.ApiHttpClient.SendAsync(System.Net.Http.HttpMethod,System.Threading.CancellationToken)">
             <summary>
             Envia uma solicitação HTTP como uma operação assíncrona.
@@ -4024,6 +4006,11 @@
             URL de autenticação padrão do serviço de sandbox.
             </summary>
         </member>
+        <member name="F:BBNetCore.Utils.ApiUrlBase.SANDBOX_BASE_URL_PIX">
+            <summary>
+            Url padrão do serviço PIX V2 em produção.
+            </summary>
+        </member>
         <member name="F:BBNetCore.Utils.ApiUrlBase.PRODUCTION_BASE_URL">
             <summary>
             Url padrão do serviço de produção.
@@ -4039,21 +4026,26 @@
             URL de autenticação padrão do serviço de produção.
             </summary>
         </member>
-        <member name="M:BBNetCore.Utils.ApiUrlBase.GetBaseUri(BBNetCore.Enumerators.AmbienteApi,BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetBaseUri(BBNetCore.Enumerators.AmbienteApi,BBNetCore.Enumerators.TipoApi)">
             <summary>
             Método que traz a url correta de acordo com a versão e ambiente definidos.
             </summary>
             <param name="environment">Ambiente de execução. <see cref="T:BBNetCore.Enumerators.AmbienteApi"/></param>
             <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
-            <param name="version">Versão da API</param>
             <returns>Url correta da API</returns>
         </member>
-        <member name="M:BBNetCore.Utils.ApiUrlBase.GetUrlBaseProducao(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetUrlBaseHomologacao(BBNetCore.Enumerators.TipoApi)">
+            <summary>
+            Método que identifica a url base de homologação, com base no tipo do serviço da API.
+            </summary>
+            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
+            <returns>A url base</returns>
+        </member>
+        <member name="M:BBNetCore.Utils.ApiUrlBase.GetUrlBaseProducao(BBNetCore.Enumerators.TipoApi)">
             <summary>
             Método que identifica a url base de produção, com base no tipo do serviço da API.
             </summary>
             <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
-            <param name="version">Versão da API</param>
             <returns>A url base</returns>
         </member>
         <member name="M:BBNetCore.Utils.ApiUrlBase.GetTipoApi(BBNetCore.Enumerators.TipoApi)">
@@ -4061,14 +4053,6 @@
             Método que identifica a path que compoem a url da API, com base no tipo do serviço da API.
             </summary>
             <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
-            <returns>Path que compoem a url da API</returns>
-        </member>
-        <member name="M:BBNetCore.Utils.ApiUrlBase.GetApiVersion(BBNetCore.Enumerators.TipoApi,BBNetCore.Enumerators.VersaoApi)">
-            <summary>
-            Método que identifica a versão da API com base no tipo de serviço.
-            </summary>
-            <param name="type">Tipo de serviço da API.<see cref="T:BBNetCore.Enumerators.TipoApi"/></param>
-            <param name="version">Versão da API</param>
             <returns>Path que compoem a url da API</returns>
         </member>
         <member name="M:BBNetCore.Utils.ApiUrlBase.GetOauthUri(BBNetCore.Enumerators.AmbienteApi)">

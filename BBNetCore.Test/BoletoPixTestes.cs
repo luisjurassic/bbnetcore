@@ -9,7 +9,7 @@ namespace BBNetCore.Test
     [TestClass]
     public class BoletoPixTestes
     {
-        private static readonly BoletoPix _pix = new(VersaoApi.V2, Configuracao.ConfiguracoesApiBb);
+        private static readonly BoletoPix _pix = new(Configuracao.ConfiguracoesApiBb);
 
         [TestMethod]
         public void CriarCobrancaPix()

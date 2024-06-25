@@ -17,10 +17,9 @@ public class Pix : ServicosBase
     /// <summary>
     /// Inicializa uma nova instância da classe <see cref="Pix"/>.
     /// </summary>
-    /// <param name="versaoApi">Versão da API.</param> 
     /// <param name="configuracoesApiBb">Configurações do serviço.</param> 
-    public Pix(VersaoApi versaoApi, ConfiguracoesApiBB configuracoesApiBb)
-        : base(TipoApi.Pix,versaoApi, configuracoesApiBb)
+    public Pix(ConfiguracoesApiBB configuracoesApiBb)
+        : base(TipoApi.Pix, configuracoesApiBb)
     {
     }
 

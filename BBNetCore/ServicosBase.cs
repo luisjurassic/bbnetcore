@@ -41,20 +41,13 @@ public class ServicosBase
     private TipoApi TipoApi { get; set; }
 
     /// <summary>
-    /// Versão da API do PIX.
-    /// </summary>    
-    private VersaoApi VersaoApi { get; set; }
-
-    /// <summary>
     /// Inicializa uma nova instância da classe <see cref="ServicosBase"/>.
     /// </summary>
     /// <param name="tipoApi">Tipo de serviço</param>
-    /// <param name="versaoApi">Versão da API</param>
     /// <param name="configuracoesApiBb">Configurações do serviço.</param> 
-    protected ServicosBase(TipoApi tipoApi, VersaoApi versaoApi, ConfiguracoesApiBB configuracoesApiBb)
+    protected ServicosBase(TipoApi tipoApi, ConfiguracoesApiBB configuracoesApiBb)
     {
         TipoApi = tipoApi;
-        VersaoApi = versaoApi;
         ConfiguracoesApiBb = configuracoesApiBb;
     }
 
@@ -64,7 +57,7 @@ public class ServicosBase
     /// <returns>Uma instancia de <see cref="ApiHttpClient"/></returns>
     protected ApiHttpClient CriarInstancia()
     {
-        ApiHttpClient client = new(ApiUrlBase.GetBaseUri(ConfiguracoesApiBb.AmbienteApi, TipoApi, VersaoApi))
+        ApiHttpClient client = new(ApiUrlBase.GetBaseUri(ConfiguracoesApiBb.AmbienteApi, TipoApi))
         {
             AuthenticationHeader = new AuthenticationHeaderValue(TipoTokenAccesso, TokenAccesso),
             Certificate = ConfiguracoesApiBb.Certificado

@@ -9,7 +9,7 @@ namespace BBNetCore.Test
     [TestClass]
     public class PixTestes
     {
-        private static readonly Pix _pix = new(VersaoApi.V1, Configuracao.ConfiguracoesApiBb);
+        private static readonly Pix _pix = new(Configuracao.ConfiguracoesApiBb);
 
         [TestMethod]
         public void CriarCobranca()
@@ -19,7 +19,7 @@ namespace BBNetCore.Test
                 DadosPix retorno = _pix.Gerar(new DadosPix()
                 {
                     Calendar = new DadosCalendario(3600),
-                    Valores = new DadosValores(10.15M),
+                    Valores = new DadosValores(9.90M),
                     ChavePix = "9e881f18-cc66-4fc7-8f2c-a795dbb2bfc1",
                     Devedor = new DadosDevedor
                     {

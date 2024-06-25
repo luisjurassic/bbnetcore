@@ -16,6 +16,11 @@ internal abstract class ApiUrlBase
     /// URL de autenticação padrão do serviço de sandbox.
     /// </summary>
     private const string SANDBOX_OAUTH_URL = "https://oauth.sandbox.bb.com.br";
+    
+    /// <summary>
+    /// Url padrão do serviço PIX V2 em produção.
+    /// </summary>
+    private const string SANDBOX_BASE_URL_PIX = "https://api-pix.hm.bb.com.br";
 
     /// <summary>
     /// Url padrão do serviço de produção.
@@ -37,33 +42,48 @@ internal abstract class ApiUrlBase
     /// </summary>
     /// <param name="environment">Ambiente de execução. <see cref="AmbienteApi"/></param>
     /// <param name="type">Tipo de serviço da API.<see cref="TipoApi"/></param>
-    /// <param name="version">Versão da API</param>
     /// <returns>Url correta da API</returns>
-    internal static string GetBaseUri(AmbienteApi environment, TipoApi type, VersaoApi version)
+    internal static string GetBaseUri(AmbienteApi environment, TipoApi type)
     {
         switch (environment)
         {
             default:
             case AmbienteApi.Desenvolvimento:
-                return $"{SANDBOX_BASE_URL}/{GetTipoApi(type)}/{GetApiVersion(type, version)}/";
+                return $"{GetUrlBaseHomologacao(type)}/{GetTipoApi(type)}/v2/";
             case AmbienteApi.Producao:
-                return $"{GetUrlBaseProducao(type, version)}/{GetTipoApi(type)}/{GetApiVersion(type, version)}/";
+                return $"{GetUrlBaseProducao(type)}/{GetTipoApi(type)}/v2/";
         }
     }
 
     /// <summary>
-    /// Método que identifica a url base de produção, com base no tipo do serviço da API.
+    /// Método que identifica a url base de homologação, com base no tipo do serviço da API.
     /// </summary>
     /// <param name="type">Tipo de serviço da API.<see cref="TipoApi"/></param>
-    /// <param name="version">Versão da API</param>
     /// <returns>A url base</returns>
-    private static string GetUrlBaseProducao(TipoApi type, VersaoApi version)
+    private static string GetUrlBaseHomologacao(TipoApi type)
     {
         switch (type)
         {
-            default:
             case TipoApi.Pix:
-                return version == VersaoApi.V2 ? PRODUCTION_BASE_URL_PIX : PRODUCTION_BASE_URL;
+                return SANDBOX_BASE_URL_PIX;
+            default:
+            case TipoApi.Boletos:
+                return SANDBOX_BASE_URL;
+        }
+    }
+    
+    /// <summary>
+    /// Método que identifica a url base de produção, com base no tipo do serviço da API.
+    /// </summary>
+    /// <param name="type">Tipo de serviço da API.<see cref="TipoApi"/></param>
+    /// <returns>A url base</returns>
+    private static string GetUrlBaseProducao(TipoApi type)
+    {
+        switch (type)
+        {
+            case TipoApi.Pix:
+                return PRODUCTION_BASE_URL_PIX;
+            default:
             case TipoApi.Boletos:
                 return PRODUCTION_BASE_URL;
         }
@@ -83,24 +103,6 @@ internal abstract class ApiUrlBase
                 return "pix";
             case TipoApi.Boletos:
                 return "cobrancas";
-        }
-    }
-
-    /// <summary>
-    /// Método que identifica a versão da API com base no tipo de serviço.
-    /// </summary>
-    /// <param name="type">Tipo de serviço da API.<see cref="TipoApi"/></param>
-    /// <param name="version">Versão da API</param>
-    /// <returns>Path que compoem a url da API</returns>
-    private static string GetApiVersion(TipoApi type, VersaoApi version)
-    {
-        switch (type)
-        {
-            default:
-            case TipoApi.Pix:
-                return version.ToString().ToLower();
-            case TipoApi.Boletos:
-                return VersaoApi.V2.ToString().ToLower();
         }
     }
 

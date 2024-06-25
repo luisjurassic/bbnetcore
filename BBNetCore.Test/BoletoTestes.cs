@@ -9,7 +9,7 @@ namespace BBNetCore.Test
     [TestClass]
     public class BoletoTestes
     {
-        private static readonly Boleto _boleto = new(VersaoApi.V2, Configuracao.ConfiguracoesApiBb);
+        private static readonly Boleto _boleto = new(Configuracao.ConfiguracoesApiBb);
 
         [TestMethod]
         public void CriarCobranca()

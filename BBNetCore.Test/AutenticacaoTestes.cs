@@ -1,14 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BBNetCore.Enumerators;
 
 namespace BBNetCore.Test
 {
     [TestClass]
     public class AutenticacaoTestes
     {
-        private static readonly Pix _pix = new(VersaoApi.V1, Configuracao.ConfiguracoesApiBb);
+        private static readonly Pix _pix = new(Configuracao.ConfiguracoesApiBb);
 
         [TestMethod]
         public async Task Auth()

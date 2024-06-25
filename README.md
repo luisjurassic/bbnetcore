@@ -9,7 +9,7 @@ Biblioteca de acesso às apis do Banco do Brasil(BB), baseada em .Net Standard 2
 - Criar 2 projetos, um para Teste e um para Prod, um vez que o projeto seja aprovado para produção, não funciona em
   homolog.
 
-As implementações da biblioteca atendem a versão 1 e 2 da API. 
+As implementações da biblioteca atendem a versão 2 da API. 
 
 ### API's implementadas?
 

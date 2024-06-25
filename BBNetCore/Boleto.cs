@@ -16,10 +16,9 @@ public class Boleto : ServicosBase
     /// <summary>
     /// Inicializa uma nova instância da classe <see cref="Boleto"/>.
     /// </summary>
-    /// <param name="versaoApi">Versão da API.</param> 
     /// <param name="configuracoesApiBb">Configurações do serviço.</param> 
-    public Boleto(VersaoApi versaoApi, ConfiguracoesApiBB configuracoesApiBb)
-        : base(TipoApi.Boletos, versaoApi, configuracoesApiBb)
+    public Boleto(ConfiguracoesApiBB configuracoesApiBb)
+        : base(TipoApi.Boletos, configuracoesApiBb)
     {
     }
 

@@ -35,7 +35,7 @@ public class ApiHttpClient
     /// <summary>
     /// Lista de status de erro da requisição.
     /// </summary>
-    private readonly int[] _requestNotAllowedStatusRange = {400, 401, 403, 404, 422, 500, 503};
+    private readonly int[] _requestNotAllowedStatusRange = { 400, 401, 403, 404, 422, 500, 503 };
 
     /// <summary>
     /// Contem o tipo e a chave do token de acesso para comunicação com a API.
@@ -144,12 +144,16 @@ public class ApiHttpClient
         return result;
     }
 
+    /// <summary>
+    /// Cria o client base para as requisições.
+    /// </summary>
+    /// <returns>O client base</returns>
     private HttpClient CreateHttpClient()
     {
-        HttpClient client = new HttpClient();
+        HttpClient client = new();
         if (Certificate != null)
         {
-            HttpClientHandler handler = new HttpClientHandler();
+            HttpClientHandler handler = new();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
             handler.SslProtocols = SslProtocols.Tls12;
             handler.ClientCertificates.Add(Certificate);
@@ -177,7 +181,7 @@ public class ApiHttpClient
         if (Url == null)
             Url = UrlBase;
 
-        HttpRequestMessage request = new HttpRequestMessage(httpMethod, Url);
+        HttpRequestMessage request = new(httpMethod, Url);
 
         ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
         HttpResponseMessage response = await client.SendAsync(request, cancellationToken);
@@ -228,11 +232,11 @@ public class ApiHttpClient
         if (Url == null)
             Url = UrlBase;
 
-        HttpRequestMessage request = new HttpRequestMessage(httpMethod, Url);
+        HttpRequestMessage request = new(httpMethod, Url);
         if (obj != null && mimeType == MimeTypes.Json)
             request.Content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, GetMineType(mimeType));
         else if (obj != null && mimeType == MimeTypes.Form)
-            request.Content = new FormUrlEncodedContent((IDictionary<string, string>) obj);
+            request.Content = new FormUrlEncodedContent((IDictionary<string, string>)obj);
 
         ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
         HttpResponseMessage response = await client.SendAsync(request, cancellationToken);
@@ -278,7 +282,7 @@ public class ApiHttpClient
     /// <returns>Se a solicitação foi bem-sucedida</returns>
     private bool CheckIfStatusCodeIsError(HttpStatusCode responseStatusCode)
     {
-        return _requestNotAllowedStatusRange.Any(r => r == (int) responseStatusCode);
+        return _requestNotAllowedStatusRange.Any(r => r == (int)responseStatusCode);
     }
 
     /// <summary>
@@ -343,7 +347,7 @@ internal static class PixHttpClientHelper
     {
         var url = $"{client.UrlBase.AbsoluteUri.TrimEnd('/')}/{endPoint.Trim('/')}";
 
-        UriBuilder uriBuilder = new UriBuilder(url);
+        UriBuilder uriBuilder = new(url);
         NameValueCollection queryString = HttpUtility.ParseQueryString(uriBuilder.Query);
 
         foreach (var key in query)
