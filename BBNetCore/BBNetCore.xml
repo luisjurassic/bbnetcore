@@ -47,6 +47,37 @@
             <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
             <returns>Dados do pagamento</returns>
         </member>
+        <member name="M:BBNetCore.Boleto.Lista(System.Int32,System.Int32,System.String,BBNetCore.Enumerators.SituacaoBoleto)">
+            <summary>
+            Listar títulos de cobrança - Em Ser, Baixados, Liquidados e Com Protesto por Beneficiário.
+            </summary>
+            <param name="agencia">Número da agência do beneficiário, sem o dígito verificador.</param>
+            <param name="conta">Número da conta do beneficiário, sem o dígito verificador.</param>
+            <param name="indicadorSituacao">Situação do boleto.
+            <para></para>
+            A - Em ser (Códigos 1,2,3,4,5, 9 e 13)
+            <para></para>
+            B - Baixados/Protestados/Liquidados (Códigos 6, 7,10, 11 e 12)
+            </param>
+            <param name="situacaoBoleto">Código da situação atual do boleto.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
+        <member name="M:BBNetCore.Boleto.ListaAsync(System.Int32,System.Int32,System.String,BBNetCore.Enumerators.SituacaoBoleto,System.Threading.CancellationToken)">
+            <summary>
+            Listar títulos de cobrança - Em Ser, Baixados, Liquidados e Com Protesto por Beneficiário, como uma operação assíncrona.
+            </summary>
+            <param name="agencia">Número da agência do beneficiário, sem o dígito verificador.</param>
+            <param name="conta">Número da conta do beneficiário, sem o dígito verificador.</param>
+            <param name="indicadorSituacao">Situação do boleto.
+            <para></para>
+            A - Em ser (Códigos 1,2,3,4,5, 9 e 13)
+            <para></para>
+            B - Baixados/Protestados/Liquidados (Códigos 6, 7,10, 11 e 12)
+            </param>
+            <param name="situacaoBoleto">Código da situação atual do boleto.</param>
+            <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
+            <returns>Dados do pagamento</returns>
+        </member>
         <member name="M:BBNetCore.Boleto.Cancelar(System.String,System.Int32)">
             <summary>
             Gerar um boleto de cobrança bancário.
@@ -1793,69 +1824,47 @@
         </member>
         <member name="T:BBNetCore.Exceptions.ApiException">
             <summary>
-            Classe de exceção básica da biblioteca.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Exceptions.ApiException.Errors">
-            <summary>
-            Erros reportados pelo serviço.
-            </summary>
-        </member>
-        <member name="M:BBNetCore.Exceptions.ApiException.#ctor(System.String)">
-            <summary>
-            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.ApiException"/>.
-            </summary>
-            <param name="message">Mensagem à ser definida na excessão.</param>
-        </member>
-        <member name="M:BBNetCore.Exceptions.ApiException.#ctor(BBNetCore.Exceptions.HttpException)">
-            <summary>
-            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.ApiException"/>.
-            </summary>
-            <param name="ex">Os dados da execção.</param>
-        </member>
-        <member name="T:BBNetCore.Exceptions.HttpException">
-            <summary>
             Classe de exceção de requisições HTTP.
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.Verb">
+        <member name="P:BBNetCore.Exceptions.ApiException.Verb">
             <summary>
             O método HTTP.
             </summary> 
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.Headers">
+        <member name="P:BBNetCore.Exceptions.ApiException.Headers">
             <summary>
             Os cabeçalhos da solicitação enviada.
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.ReasonPhrase">
+        <member name="P:BBNetCore.Exceptions.ApiException.ReasonPhrase">
             <summary>
             Frase de motivo que normalmente é enviada pelos servidores junto com o código de status.
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.Uri">
+        <member name="P:BBNetCore.Exceptions.ApiException.Uri">
             <summary>
             A representação da URL
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.Content">
+        <member name="P:BBNetCore.Exceptions.ApiException.Content">
             <summary>
             O conteudo do erro
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.ResponseHeaders">
+        <member name="P:BBNetCore.Exceptions.ApiException.ResponseHeaders">
             <summary>
             Os cabeçalhos da resposta da solicitação.
             </summary>
         </member>
-        <member name="P:BBNetCore.Exceptions.HttpException.StatusCode">
+        <member name="P:BBNetCore.Exceptions.ApiException.StatusCode">
             <summary>
             O status da requisição.
             </summary>
         </member>
-        <member name="M:BBNetCore.Exceptions.HttpException.#ctor(System.Uri,System.String,System.String,System.Net.Http.Headers.HttpRequestHeaders,System.String,System.Net.HttpStatusCode,System.Net.Http.Headers.HttpResponseHeaders,System.Exception)">
+        <member name="M:BBNetCore.Exceptions.ApiException.#ctor(System.Uri,System.String,System.String,System.Net.Http.Headers.HttpRequestHeaders,System.String,System.Net.HttpStatusCode,System.Net.Http.Headers.HttpResponseHeaders,System.Exception)">
             <summary>
-            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.HttpException"/>.
+            Inicializa uma nova instância da classe <see cref="T:BBNetCore.Exceptions.ApiException"/>.
             </summary>
             <param name="uri">A representação da URL.</param>
             <param name="verb">O método HTTP usado pela mensagem de solicitação.</param>
@@ -1865,101 +1874,6 @@
             <param name="statusCode">The status code.</param>
             <param name="responseHeaders">The headers of response.</param>
             <param name="ex">The ex.</param>
-        </member>
-        <member name="T:BBNetCore.Models.ApiErro">
-            <summary>
-            Classe contendo mensagens de erro reportadas pelo serviço.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro.Codigo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro.Versao">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro.Mensagem">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro.Ocorrencia">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:BBNetCore.Models.ApiErro2">
-            <summary>
-            Classe contendo mensagens de erro reportadas pelo serviço.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro2.CodigoStatus">
-            <summary>
-            Código HTTP do status retornado.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro2.Erro">
-            <summary>
-            Typo do erro
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro2.Mensagem">
-            <summary>
-            Mensagem do problema.
-            </summary>
-        </member>
-        <member name="T:BBNetCore.Models.ApiErro3">
-            <summary>
-            Classe contendo mensagens de erro reportadas pelo serviço.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro3.Tipo">
-            <summary>
-            URI de referência que identifica o tipo de problema. De acordo com a RFC 7807.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro3.Descricao">
-            <summary>
-            Descrição resumida do problema.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro3.Status">
-            <summary>
-            Código HTTP do status retornado.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro3.Detalhes">
-            <summary>
-            Descrição completa do problema.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.ApiErro3.Violacoes">
-            <summary>
-            Identificador de correlação do problema para fins de suporte.
-            </summary>
-        </member>
-        <member name="T:BBNetCore.Models.Violacoes">
-            <summary>
-            Classe contendo informações do problema para fins de suporte.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.Violacoes.Razao">
-            <summary>
-            Descrição do erro
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.Violacoes.Propriedade">
-            <summary>
-            Nome da propriedade.
-            </summary>
-        </member>
-        <member name="P:BBNetCore.Models.Violacoes.Valor">
-            <summary>
-            Valor da propriedade
-            </summary>
         </member>
         <member name="T:BBNetCore.Models.ConfiguracoesApiBB">
             <summary>
@@ -3964,12 +3878,12 @@
         </member>
         <member name="M:BBNetCore.Utils.ApiHttpClient.CreateHttpException(System.Net.Http.HttpResponseMessage,System.String,System.Exception)">
             <summary>
-            Cria uma instancia da exceção do tipo <see cref="T:BBNetCore.Exceptions.HttpException"/>. 
+            Cria uma instancia da exceção do tipo <see cref="T:BBNetCore.Exceptions.ApiException"/>. 
             </summary>
             <param name="response">A Mensagem de resposta, incluindo o código de status e os dados</param>
             <param name="content">O conteudo da resposta</param>
             <param name="ex">A exceção original</param>
-            <returns>Uma instancia de <see cref="T:BBNetCore.Exceptions.HttpException"/></returns>
+            <returns>Uma instancia de <see cref="T:BBNetCore.Exceptions.ApiException"/></returns>
         </member>
         <member name="M:BBNetCore.Utils.ApiHttpClient.GetMineType(BBNetCore.Enumerators.MimeTypes)">
             <summary>

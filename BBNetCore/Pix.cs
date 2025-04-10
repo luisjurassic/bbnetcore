@@ -42,26 +42,15 @@ public class Pix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<DadosPix> GerarAsync(DadosPix requestCharge, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            DadosPix result = await client
-                .PrepareClient("cob/", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .PostAsync<DadosPix>(requestCharge, MimeTypes.Json, cancellationToken);
+        DadosPix result = await client
+            .PrepareClient("cob/", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .PostAsync<DadosPix>(requestCharge, MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 
     /// <summary>
@@ -83,26 +72,15 @@ public class Pix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<DadosPix> ConsultarAsync(string transacaoId, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            DadosPix result = await client
-                .PrepareClient($"cob/{transacaoId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .GetAsync<DadosPix>(MimeTypes.Json, cancellationToken);
+        DadosPix result = await client
+            .PrepareClient($"cob/{transacaoId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .GetAsync<DadosPix>(MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 
     /// <summary>
@@ -124,26 +102,15 @@ public class Pix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<DadosPix> AtualizarAsync(DadosPix requestCharge, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            DadosPix result = await client
-                .PrepareClient($"cob/{requestCharge.TransacaoId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .PatchAsync<DadosPix>(requestCharge, MimeTypes.Json, cancellationToken);
+        DadosPix result = await client
+            .PrepareClient($"cob/{requestCharge.TransacaoId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .PatchAsync<DadosPix>(requestCharge, MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 
     /// <summary>
@@ -165,26 +132,15 @@ public class Pix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<RespostaDevolucaoPix> DevolverAsync(DadosDevolucaoPix devolucao, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            RespostaDevolucaoPix result = await client
-                .PrepareClient($"pix/{devolucao.EndToEndId}/devolucao/{devolucao.Id}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .PutAsync<RespostaDevolucaoPix>(devolucao, MimeTypes.Json, cancellationToken);
+        RespostaDevolucaoPix result = await client
+            .PrepareClient($"pix/{devolucao.EndToEndId}/devolucao/{devolucao.Id}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .PutAsync<RespostaDevolucaoPix>(devolucao, MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 
     /// <summary>
@@ -206,26 +162,15 @@ public class Pix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<RespostaDevolucaoPix> ConsultarDevolucaoAsync(DadosDevolucaoPix devolucao, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            RespostaDevolucaoPix result = await client
-                .PrepareClient($"pix/{devolucao.EndToEndId}/devolucao/{devolucao.Id}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .GetAsync<RespostaDevolucaoPix>(MimeTypes.Json, cancellationToken);
+        RespostaDevolucaoPix result = await client
+            .PrepareClient($"pix/{devolucao.EndToEndId}/devolucao/{devolucao.Id}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .GetAsync<RespostaDevolucaoPix>(MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 
     /// <summary>
@@ -248,34 +193,23 @@ public class Pix : ServicosBase
     /// <returns>Os dados de pagamento</returns>
     public async Task<DadosPagamentoPix> PagarAsync(string qrCode, CancellationToken cancellationToken = default)
     {
-        try
+        if (ConfiguracoesApiBb.AmbienteApi == AmbienteApi.Producao)
+            throw new NotSupportedException("O metodo de pagar, deve ser usado exclusivamente em desenvolvimento, para simular um pagamento com QR Code");
+
+        await AutenticarAsync();
+
+        ApiHttpClient client = new ApiHttpClient("https://api.hm.bb.com.br/testes-portal-desenvolvedor/v1")
         {
-            if (ConfiguracoesApiBb.AmbienteApi == AmbienteApi.Producao)
-                throw new NotSupportedException("O metodo de pagar, deve ser usado exclusivamente em desenvolvimento, para simular um pagamento com QR Code");
+            AuthenticationHeader = new AuthenticationHeaderValue(TipoTokenAccesso, TokenAccesso)
+        };
 
-            await AutenticarAsync();
+        RespostaPagamentoPix result = await client
+            .PrepareClient("boletos-pix/pagar", "gw-app-key=95cad3f03fd9013a9d15005056825665")
+            .PostAsync<RespostaPagamentoPix>(new { pix = qrCode }, MimeTypes.Json, cancellationToken);
 
-            ApiHttpClient client = new ApiHttpClient("https://api.hm.bb.com.br/testes-portal-desenvolvedor/v1")
-            {
-                AuthenticationHeader = new AuthenticationHeaderValue(TipoTokenAccesso, TokenAccesso)
-            };
+        DadosPagamentoPix Payment = await ConsultarPagamentoAsync(result.EndToEndId, cancellationToken);
 
-            RespostaPagamentoPix result = await client
-                .PrepareClient("boletos-pix/pagar", "gw-app-key=95cad3f03fd9013a9d15005056825665")
-                .PostAsync<RespostaPagamentoPix>(new { pix = qrCode }, MimeTypes.Json, cancellationToken);
-
-            DadosPagamentoPix Payment = await ConsultarPagamentoAsync(result.EndToEndId, cancellationToken);
-
-            return Payment;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return Payment;
     }
 
     /// <summary>
@@ -297,25 +231,14 @@ public class Pix : ServicosBase
     /// <returns>Dados do pagamento</returns>
     public async Task<DadosPagamentoPix> ConsultarPagamentoAsync(string e2eId, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            await AutenticarAsync();
+        await AutenticarAsync();
 
-            ApiHttpClient client = CriarInstancia();
+        ApiHttpClient client = CriarInstancia();
 
-            DadosPagamentoPix result = await client
-                .PrepareClient($"pix/{e2eId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
-                .GetAsync<DadosPagamentoPix>(MimeTypes.Json, cancellationToken);
+        DadosPagamentoPix result = await client
+            .PrepareClient($"pix/{e2eId}", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .GetAsync<DadosPagamentoPix>(MimeTypes.Json, cancellationToken);
 
-            return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return result;
     }
 }

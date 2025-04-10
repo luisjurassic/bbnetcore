@@ -1,5 +1,4 @@
 ﻿using System;
-using BBNetCore.Enumerators;
 using BBNetCore.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;

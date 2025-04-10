@@ -71,41 +71,30 @@ public class ServicosBase
     /// <returns>Se autenticado com sucesso</returns>
     public async Task<bool> AutenticarAsync()
     {
-        try
-        {
-            if (!string.IsNullOrWhiteSpace(TokenAccesso) && ExpiracaoTokenAccesso > DateTime.Now)
-                return true;
+        if (!string.IsNullOrWhiteSpace(TokenAccesso) && ExpiracaoTokenAccesso > DateTime.Now)
+            return true;
 
-            if (ConfiguracoesApiBb.Permissoes.Length == 0)
-                throw new ArgumentException("Nenhuma permissão de recurso informada. Propriedade 'Scope' da classe 'PixOptions' sem itens.");
+        if (ConfiguracoesApiBb.Permissoes.Length == 0)
+            throw new ArgumentException("Nenhuma permissão de recurso informada. Propriedade 'Scope' da classe 'PixOptions' sem itens.");
 
-            ApiHttpClient client = new(ApiUrlBase.GetOauthUri(ConfiguracoesApiBb.AmbienteApi));
+        ApiHttpClient client = new(ApiUrlBase.GetOauthUri(ConfiguracoesApiBb.AmbienteApi));
 
-            var credentials = $"{ConfiguracoesApiBb.ClienteId}:{ConfiguracoesApiBb.ClienteSecret}";
-            var encodedAuth = Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials));
+        var credentials = $"{ConfiguracoesApiBb.ClienteId}:{ConfiguracoesApiBb.ClienteSecret}";
+        var encodedAuth = Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials));
 
-            client.AuthenticationHeader = new AuthenticationHeaderValue("Basic", encodedAuth);
+        client.AuthenticationHeader = new AuthenticationHeaderValue("Basic", encodedAuth);
 
-            TokenAcesso retorno = await client
-                .PostAsync<TokenAcesso>(new Dictionary<string, string>
-                {
-                    { "grant_type", ConfiguracoesApiBb.TipoFluxo },
-                    { "scope", string.Join(" ", ConfiguracoesApiBb.Permissoes) },
-                }, MimeTypes.Form);
+        TokenAcesso retorno = await client
+            .PostAsync<TokenAcesso>(new Dictionary<string, string>
+            {
+                { "grant_type", ConfiguracoesApiBb.TipoFluxo },
+                { "scope", string.Join(" ", ConfiguracoesApiBb.Permissoes) },
+            }, MimeTypes.Form);
 
-            TipoTokenAccesso = retorno.TokenType;
-            TokenAccesso = retorno.Token;
-            ExpiracaoTokenAccesso = DateTime.Now.AddSeconds(retorno.ExpiresIn);
+        TipoTokenAccesso = retorno.TokenType;
+        TokenAccesso = retorno.Token;
+        ExpiracaoTokenAccesso = DateTime.Now.AddSeconds(retorno.ExpiresIn);
 
-            return false;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        return false;
     }
 }

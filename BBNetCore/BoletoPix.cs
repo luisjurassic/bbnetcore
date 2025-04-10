@@ -43,8 +43,6 @@ public class BoletoPix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<RespostaBoletoPix> GerarAsync(string nossoNumero, int convenio, CancellationToken cancellationToken = default)
     {
-        try
-        {
             await AutenticarAsync();
 
             ApiHttpClient client = CriarInstancia();
@@ -54,15 +52,6 @@ public class BoletoPix : ServicosBase
                 .PostAsync<RespostaBoletoPix>(new { numeroConvenio = convenio }, MimeTypes.Json, cancellationToken);
 
             return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
     }
 
     /// <summary>
@@ -86,8 +75,6 @@ public class BoletoPix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<RespostaBoletoManualPix> GerarManualAsync(string nossoNumero, int convenio, CancellationToken cancellationToken = default)
     {
-        try
-        {
             await AutenticarAsync();
 
             ApiHttpClient client = CriarInstancia();
@@ -97,15 +84,7 @@ public class BoletoPix : ServicosBase
                 .PostAsync<RespostaBoletoManualPix>(new { numeroConvenio = convenio }, MimeTypes.Json, cancellationToken);
 
             return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        
     }
 
     /// <summary>
@@ -129,8 +108,6 @@ public class BoletoPix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<string> CancelarAsync(string nossoNumero, int convenio, CancellationToken cancellationToken = default)
     {
-        try
-        {
             await AutenticarAsync();
 
             ApiHttpClient client = CriarInstancia();
@@ -140,15 +117,7 @@ public class BoletoPix : ServicosBase
                 .PostAsync<string>(new { numeroConvenio = convenio }, MimeTypes.Json, cancellationToken);
 
             return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+       
     }
 
     /// <summary>
@@ -172,8 +141,6 @@ public class BoletoPix : ServicosBase
     /// <returns>Dados da cobrança</returns>
     public async Task<RespostaBoletoManualPix> CancelarManualAsync(string nossoNumero, int convenio, CancellationToken cancellationToken = default)
     {
-        try
-        {
             await AutenticarAsync();
 
             ApiHttpClient client = CriarInstancia();
@@ -183,15 +150,7 @@ public class BoletoPix : ServicosBase
                 .PostAsync<RespostaBoletoManualPix>(new { numeroConvenio = convenio }, MimeTypes.Json, cancellationToken);
 
             return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+        
     }
 
     /// <summary>
@@ -215,8 +174,6 @@ public class BoletoPix : ServicosBase
     /// <returns>Dados do pagamento</returns>
     public async Task<RespostaBoletoPix> ConsultarAsync(string nossoNumero, int convenio, CancellationToken cancellationToken = default)
     {
-        try
-        {
             await AutenticarAsync();
 
             ApiHttpClient client = CriarInstancia();
@@ -226,14 +183,6 @@ public class BoletoPix : ServicosBase
                 .GetAsync<RespostaBoletoPix>(MimeTypes.Json, cancellationToken);
 
             return result;
-        }
-        catch (HttpException ex)
-        {
-            throw new ApiException(ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApiException(ex.Message);
-        }
+       
     }
 }

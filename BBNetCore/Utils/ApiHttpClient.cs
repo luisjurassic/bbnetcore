@@ -14,6 +14,7 @@ using System.Web;
 using BBNetCore.Enumerators;
 using BBNetCore.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BBNetCore.Utils;
 
@@ -76,7 +77,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T">O tipo de dados de retorno</typeparam>
     /// <returns>Os dados</returns>
-    public async Task<T> PostAsync<T>(MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    public async Task<T> PostAsync<T>(MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         return await PostAsync<T>(null, mimeType, cancellationToken);
     }
@@ -89,7 +91,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T">O tipo de dados de retorno</typeparam>
     /// <returns>Os dados</returns>
-    public async Task<T> PostAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    public async Task<T> PostAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         T result = await SendAsync<T>(obj, HttpMethod.Post, mimeType, cancellationToken);
         return result;
@@ -111,7 +114,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T">O tipo de dados de retorno</typeparam>
     /// <returns>Os dados</returns>
-    public async Task<T> PatchAsync<T>(MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    public async Task<T> PatchAsync<T>(MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         return await PatchAsync<T>(null, mimeType, cancellationToken);
     }
@@ -124,7 +128,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T">O tipo de dados de retorno</typeparam>
     /// <returns>Os dados</returns>
-    public async Task<T> PatchAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    public async Task<T> PatchAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         T result = await SendAsync<T>(obj, new HttpMethod("PATCH"), mimeType, cancellationToken);
         return result;
@@ -138,7 +143,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T">O tipo de dados de retorno</typeparam>
     /// <returns>Os dados</returns>
-    public async Task<T> PutAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    public async Task<T> PutAsync<T>(object obj, MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         T result = await SendAsync<T>(obj, new HttpMethod("PUT"), mimeType, cancellationToken);
         return result;
@@ -154,9 +160,10 @@ public class ApiHttpClient
         if (Certificate != null)
         {
             HttpClientHandler handler = new();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.SslProtocols = SslProtocols.Tls12;
-            handler.ClientCertificates.Add(Certificate);
+            //handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            //handler.SslProtocols = SslProtocols.Tls12;
+            //handler.ClientCertificates.Add(Certificate);
+            handler.ServerCertificateCustomValidationCallback += (_, _, _, _) => true;
 
             client = new HttpClient(handler);
         }
@@ -222,7 +229,8 @@ public class ApiHttpClient
     /// <param name="cancellationToken">Token de notificação de cancelamento de threads gerenciadas.</param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    private async Task<T> SendAsync<T>(object obj, HttpMethod httpMethod, MimeTypes mimeType = MimeTypes.Json, CancellationToken cancellationToken = default)
+    private async Task<T> SendAsync<T>(object obj, HttpMethod httpMethod, MimeTypes mimeType = MimeTypes.Json,
+        CancellationToken cancellationToken = default)
     {
         string content = string.Empty;
         T result = default;
@@ -286,18 +294,18 @@ public class ApiHttpClient
     }
 
     /// <summary>
-    /// Cria uma instancia da exceção do tipo <see cref="HttpException"/>. 
+    /// Cria uma instancia da exceção do tipo <see cref="ApiException"/>. 
     /// </summary>
     /// <param name="response">A Mensagem de resposta, incluindo o código de status e os dados</param>
     /// <param name="content">O conteudo da resposta</param>
     /// <param name="ex">A exceção original</param>
-    /// <returns>Uma instancia de <see cref="HttpException"/></returns>
-    private static HttpException CreateHttpException(HttpResponseMessage response, string content, Exception ex)
+    /// <returns>Uma instancia de <see cref="ApiException"/></returns>
+    private static ApiException CreateHttpException(HttpResponseMessage response, string content, Exception ex)
     {
         Uri requestUri = null;
         string method = null;
         HttpRequestHeaders requestHeaders = null;
-        HttpRequestMessage requestMessage = response.RequestMessage;
+        HttpRequestMessage requestMessage = response?.RequestMessage;
         if (requestMessage != null)
         {
             requestUri = requestMessage.RequestUri;
@@ -305,14 +313,31 @@ public class ApiHttpClient
             requestHeaders = requestMessage.Headers;
         }
 
-        return new HttpException(
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            JObject json = JObject.Parse(content);
+
+            var jarray = json.SelectToken("erros");
+
+            if (jarray != null)
+            {
+                List<string> erros = [];
+                erros.AddRange(jarray.Values<string>("error_description"));
+                erros.AddRange(jarray.Values<string>("message"));
+                erros.AddRange(jarray.Values<string>("mensagem"));
+                erros.AddRange(jarray.Values<string>("textoMensagem"));
+                content = string.Join(", ", erros);
+            }
+        }
+
+        return new ApiException(
             requestUri,
             method,
-            response.ReasonPhrase,
+            response?.ReasonPhrase,
             requestHeaders,
             content,
-            response.StatusCode,
-            response.Headers,
+            response?.StatusCode ?? HttpStatusCode.InternalServerError,
+            response?.Headers,
             ex);
     }
 

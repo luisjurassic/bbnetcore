@@ -52,7 +52,7 @@ namespace BBNetCore.Test
         {
             try
             {
-                RespostaBoletoPix retorno = _pix.Consultar("00029023220000116585", 2902322);
+                RespostaBoletoPix retorno = _pix.Consultar("00029023220000123751", 2902322);
 
                 Assert.IsNotNull(retorno, "Pix do boleto não foi encontrada");
 

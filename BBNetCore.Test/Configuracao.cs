@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using BBNetCore.Enumerators;
 using BBNetCore.Models;
 

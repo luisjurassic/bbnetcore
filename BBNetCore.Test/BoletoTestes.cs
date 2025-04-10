@@ -19,7 +19,8 @@ namespace BBNetCore.Test
                 RespostaBoleto retorno = _boleto.Gerar(new DadosBoleto
                 {
                     AceiteTituloVencido = false,
-                    Beneficiario = new DadosBoletoBeneficiario(TipoInscricao.CNPJ, "74910037000193", "TECIDOS FARIA DUARTE"),
+                    Beneficiario =
+                        new DadosBoletoBeneficiario(TipoInscricao.CNPJ, "74910037000193", "TECIDOS FARIA DUARTE"),
                     Carteira = 17,
                     CodigoAceite = CodigoAceite.Aceite,
                     CodigoModalidade = CodigoModalidade.Simples,
@@ -53,7 +54,8 @@ namespace BBNetCore.Test
                 Assert.IsNotNull(retorno, "Boleto bancário não gerado");
 
                 Console.WriteLine(JsonConvert.SerializeObject(retorno));
-                Console.WriteLine($"Boleto bancário gerado. LinhaDigitavel: {retorno.LinhaDigitavel}, CodigoBarra: {retorno.CodigoBarras}");
+                Console.WriteLine(
+                    $"Boleto bancário gerado. LinhaDigitavel: {retorno.LinhaDigitavel}, CodigoBarra: {retorno.CodigoBarras}");
             }
             catch (Exception e)
             {
@@ -71,13 +73,33 @@ namespace BBNetCore.Test
                 Assert.IsNotNull(retorno, "Boleto bancário não encontrado");
 
                 Console.WriteLine(JsonConvert.SerializeObject(retorno));
-                Console.WriteLine($"Boleto bancário encontrado. LinhaDigitavel: {retorno.LinhaDigitavel}, CodigoBarra: {retorno.CodigoBarras}");
+                Console.WriteLine(
+                    $"Boleto bancário encontrado. LinhaDigitavel: {retorno.LinhaDigitavel}, CodigoBarra: {retorno.CodigoBarras}");
             }
             catch (Exception e)
             {
                 Assert.Fail(e.Message);
             }
         }
+
+        [TestMethod]
+        public void ListaCobranca()
+        {
+            try
+            {
+                var retorno = _boleto.Lista(123, 1);
+
+                Assert.IsNotNull(retorno, "Boleto bancário não encontrado");
+
+                Console.WriteLine(JsonConvert.SerializeObject(retorno));
+                Console.WriteLine($"{retorno.Count} boletos bancário encontrado(s)");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
 
         [TestMethod]
         public void Cancelar()
@@ -89,7 +111,8 @@ namespace BBNetCore.Test
                 Assert.IsNotNull(retorno, "Boleto bancário não cancelado");
 
                 Console.WriteLine(JsonConvert.SerializeObject(retorno));
-                Console.WriteLine($"Boleto bancário cancelado. NumeroContrato: {retorno.NumeroContrato}, Data: {retorno.Data}");
+                Console.WriteLine(
+                    $"Boleto bancário cancelado. NumeroContrato: {retorno.NumeroContrato}, Data: {retorno.Data}");
             }
             catch (Exception e)
             {
