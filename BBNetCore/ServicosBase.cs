@@ -57,6 +57,10 @@ public class ServicosBase
     /// <returns>Uma instancia de <see cref="ApiHttpClient"/></returns>
     protected ApiHttpClient CriarInstancia()
     {
+        if (ConfiguracoesApiBb.AmbienteApi == AmbienteApi.Producao && ConfiguracoesApiBb.Certificado is null)
+            throw new Exception(
+                "Certificado não informado. Propriedade 'Certificado' da classe 'ConfiguracoesApiBB' não informada.");
+
         ApiHttpClient client = new(ApiUrlBase.GetBaseUri(ConfiguracoesApiBb.AmbienteApi, TipoApi))
         {
             AuthenticationHeader = new AuthenticationHeaderValue(TipoTokenAccesso, TokenAccesso),
@@ -75,7 +79,8 @@ public class ServicosBase
             return true;
 
         if (ConfiguracoesApiBb.Permissoes.Length == 0)
-            throw new ArgumentException("Nenhuma permissão de recurso informada. Propriedade 'Scope' da classe 'PixOptions' sem itens.");
+            throw new ArgumentException(
+                "Nenhuma permissão de recurso informada. Propriedade 'Scope' da classe 'PixOptions' sem itens.");
 
         ApiHttpClient client = new(ApiUrlBase.GetOauthUri(ConfiguracoesApiBb.AmbienteApi));
 
