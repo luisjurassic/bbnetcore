@@ -160,9 +160,9 @@ public class ApiHttpClient
         if (Certificate != null)
         {
             HttpClientHandler handler = new();
-            //handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            //handler.SslProtocols = SslProtocols.Tls12;
-            //handler.ClientCertificates.Add(Certificate);
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.SslProtocols = SslProtocols.Tls12;
+            handler.ClientCertificates.Add(Certificate);
             handler.ServerCertificateCustomValidationCallback += (_, _, _, _) => true;
 
             client = new HttpClient(handler);

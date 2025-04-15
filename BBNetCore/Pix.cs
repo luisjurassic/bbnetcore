@@ -47,7 +47,7 @@ public class Pix : ServicosBase
         ApiHttpClient client = CriarInstancia();
 
         DadosPix result = await client
-            .PrepareClient("cob/", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
+            .PrepareClient("cob", $"gw-dev-app-key={ConfiguracoesApiBb.ChaveApp}")
             .PostAsync<DadosPix>(requestCharge, MimeTypes.Json, cancellationToken);
 
         return result;
